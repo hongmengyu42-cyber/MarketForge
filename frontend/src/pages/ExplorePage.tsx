@@ -16,6 +16,7 @@ import {
   Zap,
   Check,
   ShieldCheck,
+  ChevronDown,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { Listing, Category } from '@/types';
@@ -117,13 +118,13 @@ export default function ExplorePage() {
   return (
     <div className="w-full pb-16">
       {/* ══════════════════════════════════════════════════════════════
-           PREMIUM HERO BANNER — Pure CSS 3D Glass Orb (no image assets)
-           Senior FE pattern: asymmetric 55/45 grid, clean type scale,
-           animated CSS orb with layered radial gradients + ring halos
+           PREMIUM FULL-SCREEN HERO BANNER — Pure CSS 3D Glass Orb
+           Full viewport height (100dvh - navbar) with centered layout,
+           commanding typography, and pinned trust & scroll bar.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="w-full bg-white overflow-hidden">
+      <section className="w-full min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex flex-col justify-between bg-white overflow-hidden relative">
         {/* Subtle full-width background gradient that bleeds edge-to-edge */}
-        <div className="relative min-h-[580px] lg:min-h-[640px] flex items-center">
+        <div className="relative flex-1 flex items-center w-full">
           {/* Background decorative blobs — fixed positions, no overflow issues */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full"
@@ -135,18 +136,18 @@ export default function ExplorePage() {
           </div>
 
           {/* Inner constrained grid */}
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-20">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 lg:py-14">
             <div className="grid lg:grid-cols-[1fr_480px] xl:grid-cols-[1fr_540px] gap-10 lg:gap-16 items-center">
 
               {/* ── LEFT: Copy Column ── */}
               <div className="space-y-7 max-w-2xl animate-fade-up">
 
-                {/* Headline — 2 controlled lines, no orphans */}
+                {/* Headline — 2 controlled lines, commanding typography */}
                 <div className="space-y-2">
-                  <h1 className="text-[42px] sm:text-5xl lg:text-[56px] font-black tracking-tight leading-[1.1] text-slate-900">
+                  <h1 className="text-4xl sm:text-5xl lg:text-[58px] xl:text-[64px] font-black tracking-tight leading-[1.08] text-slate-900">
                     Hire with Confidence.
                   </h1>
-                  <h1 className="text-[42px] sm:text-5xl lg:text-[56px] font-black tracking-tight leading-[1.1]"
+                  <h1 className="text-4xl sm:text-5xl lg:text-[58px] xl:text-[64px] font-black tracking-tight leading-[1.08]"
                     style={{
                       background: 'linear-gradient(90deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%)',
                       WebkitBackgroundClip: 'text',
@@ -159,16 +160,16 @@ export default function ExplorePage() {
                 </div>
 
                 {/* Subheadline */}
-                <p className="text-slate-500 text-[17px] leading-[1.75] max-w-[520px]">
+                <p className="text-slate-500 text-base sm:text-lg leading-[1.7] max-w-[540px]">
                   MarketForge auto-locks payments in smart escrow, releases funds only when milestones are verified — so both sides win, every time.
                 </p>
 
                 {/* Single primary CTA */}
-                <div className="pt-1">
+                <div className="pt-1 flex items-center gap-4">
                   <button
                     type="button"
                     onClick={() => openModal('auth')}
-                    className="font-bold text-sm text-white px-8 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                    className="font-bold text-sm text-white px-8 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer shadow-md hover:shadow-lg"
                     style={{
                       background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
                       boxShadow: '0 8px 24px rgba(99,102,241,0.35), 0 2px 6px rgba(99,102,241,0.20)',
@@ -176,10 +177,17 @@ export default function ExplorePage() {
                   >
                     Get Started — It's Free
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => setIsDemoOpen(true)}
+                    className="hidden sm:inline-flex items-center gap-2 font-bold text-sm text-indigo-600 bg-indigo-50/80 hover:bg-indigo-100/80 px-6 py-4 rounded-2xl transition-all duration-200 cursor-pointer"
+                  >
+                    <Zap size={16} /> How Escrow Works
+                  </button>
                 </div>
 
                 {/* Search bar */}
-                <div className="pt-1 max-w-[500px]">
+                <div className="pt-1 max-w-[520px]">
                   <div className="relative rounded-2xl"
                     style={{ boxShadow: '0 4px 20px rgba(99,102,241,0.08), 0 1px 4px rgba(0,0,0,0.05)' }}
                   >
@@ -195,14 +203,14 @@ export default function ExplorePage() {
                       <button
                         type="button"
                         onClick={() => setSearch('')}
-                        className="absolute right-[88px] top-1/2 -translate-y-1/2 text-[11px] text-slate-400 hover:text-slate-600 px-1"
+                        className="absolute right-[88px] top-1/2 -translate-y-1/2 text-[11px] text-slate-400 hover:text-slate-600 px-1 cursor-pointer"
                       >
                         Clear
                       </button>
                     )}
                     <button
                       type="button"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all cursor-pointer"
                       style={{ background: 'linear-gradient(135deg, #4f46e5, #7c3aed)' }}
                     >
                       Search
@@ -216,7 +224,7 @@ export default function ExplorePage() {
                         key={tag}
                         type="button"
                         onClick={() => setSearch(tag)}
-                        className="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-white text-slate-600 border border-slate-200/80 hover:border-indigo-300 hover:text-indigo-700 transition-colors"
+                        className="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-white text-slate-600 border border-slate-200/80 hover:border-indigo-300 hover:text-indigo-700 transition-colors cursor-pointer"
                       >
                         {tag}
                       </button>
@@ -240,18 +248,18 @@ export default function ExplorePage() {
               </div>
 
               {/* ── RIGHT: Pure CSS 3D Glass Orb ── */}
-              <div className="relative flex items-center justify-center h-[400px] lg:h-[480px] select-none pointer-events-none">
+              <div className="relative flex items-center justify-center h-[420px] lg:h-[500px] select-none pointer-events-none">
 
-                {/* Ambient circular glow behind the orb — strictly rounded-full, no square container */}
+                {/* Ambient circular glow behind the orb */}
                 <div
-                  className="absolute w-80 h-80 rounded-full animate-pulse-glow"
+                  className="absolute w-88 h-88 rounded-full animate-pulse-glow"
                   style={{
-                    background: 'radial-gradient(circle, rgba(99,102,241,0.20) 0%, rgba(139,92,246,0.12) 45%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(99,102,241,0.22) 0%, rgba(139,92,246,0.14) 45%, transparent 70%)',
                   }}
                 />
 
                 {/* Outer ring 1 — slow spin */}
-                <div className="absolute w-[380px] h-[380px] rounded-full animate-orb-spin"
+                <div className="absolute w-[400px] h-[400px] rounded-full animate-orb-spin"
                   style={{
                     border: '1.5px solid rgba(99,102,241,0.18)',
                     boxShadow: 'inset 0 0 40px rgba(99,102,241,0.08)',
@@ -264,7 +272,7 @@ export default function ExplorePage() {
                 </div>
 
                 {/* Outer ring 2 — reverse spin, tilted */}
-                <div className="absolute w-[300px] h-[300px] rounded-full animate-orb-spin-rev"
+                <div className="absolute w-[320px] h-[320px] rounded-full animate-orb-spin-rev"
                   style={{
                     border: '1px solid rgba(139,92,246,0.14)',
                     transform: 'rotate(45deg)',
@@ -276,42 +284,42 @@ export default function ExplorePage() {
                 </div>
 
                 {/* Core glass orb */}
-                <div className="relative w-52 h-52 rounded-full z-10"
+                <div className="relative w-56 h-56 rounded-full z-10"
                   style={{
                     background: `
-                      radial-gradient(circle at 32% 28%, rgba(255,255,255,0.90) 0%, transparent 42%),
-                      radial-gradient(circle at 68% 72%, rgba(192,132,252,0.55) 0%, transparent 48%),
-                      radial-gradient(circle at 50% 50%, rgba(99,102,241,0.75) 0%, rgba(139,92,246,0.60) 50%, rgba(59,130,246,0.55) 100%)
+                      radial-gradient(circle at 32% 28%, rgba(255,255,255,0.92) 0%, transparent 42%),
+                      radial-gradient(circle at 68% 72%, rgba(192,132,252,0.58) 0%, transparent 48%),
+                      radial-gradient(circle at 50% 50%, rgba(99,102,241,0.78) 0%, rgba(139,92,246,0.62) 50%, rgba(59,130,246,0.58) 100%)
                     `,
                     boxShadow: `
-                      inset 0 -20px 60px rgba(139,92,246,0.35),
-                      inset 0 20px 40px rgba(255,255,255,0.65),
-                      0 30px 80px rgba(99,102,241,0.30),
-                      0 10px 30px rgba(139,92,246,0.20)
+                      inset 0 -22px 64px rgba(139,92,246,0.38),
+                      inset 0 22px 44px rgba(255,255,255,0.70),
+                      0 32px 84px rgba(99,102,241,0.32),
+                      0 12px 32px rgba(139,92,246,0.22)
                     `,
                     backdropFilter: 'blur(2px)',
                   }}
                 >
                   {/* Specular highlight (white shine top-left) */}
-                  <div className="absolute top-6 left-7 w-14 h-10 rounded-full"
+                  <div className="absolute top-6 left-7 w-16 h-11 rounded-full"
                     style={{
-                      background: 'radial-gradient(ellipse, rgba(255,255,255,0.90) 0%, transparent 70%)',
+                      background: 'radial-gradient(ellipse, rgba(255,255,255,0.92) 0%, transparent 70%)',
                       filter: 'blur(6px)',
                       transform: 'rotate(-20deg)',
                     }}
                   />
                   {/* Secondary highlight bottom-right */}
-                  <div className="absolute bottom-7 right-8 w-8 h-6 rounded-full"
+                  <div className="absolute bottom-7 right-8 w-9 h-7 rounded-full"
                     style={{
-                      background: 'radial-gradient(ellipse, rgba(255,255,255,0.45) 0%, transparent 70%)',
+                      background: 'radial-gradient(ellipse, rgba(255,255,255,0.48) 0%, transparent 70%)',
                       filter: 'blur(4px)',
                     }}
                   />
                   {/* Inner reflection band */}
                   <div className="absolute inset-6 rounded-full"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%)',
-                      border: '1px solid rgba(255,255,255,0.30)',
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.20) 0%, transparent 60%)',
+                      border: '1px solid rgba(255,255,255,0.32)',
                     }}
                   />
                 </div>
@@ -321,9 +329,9 @@ export default function ExplorePage() {
                 {/* Top-right card: Escrow Protected */}
                 <div className="absolute top-8 right-0 animate-float-reverse z-20 rounded-2xl px-3.5 py-2.5"
                   style={{
-                    background: 'rgba(255,255,255,0.92)',
+                    background: 'rgba(255,255,255,0.94)',
                     backdropFilter: 'blur(16px)',
-                    border: '1px solid rgba(255,255,255,0.90)',
+                    border: '1px solid rgba(255,255,255,0.92)',
                     boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(99,102,241,0.08)',
                   }}
                 >
@@ -342,9 +350,9 @@ export default function ExplorePage() {
                 {/* Bottom-left card: Payout */}
                 <div className="absolute bottom-10 left-0 animate-float-slow z-20 rounded-2xl px-3.5 py-2.5"
                   style={{
-                    background: 'rgba(255,255,255,0.92)',
+                    background: 'rgba(255,255,255,0.94)',
                     backdropFilter: 'blur(16px)',
-                    border: '1px solid rgba(255,255,255,0.90)',
+                    border: '1px solid rgba(255,255,255,0.92)',
                     boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(99,102,241,0.08)',
                   }}
                 >
@@ -363,9 +371,9 @@ export default function ExplorePage() {
                 {/* Top-left card: Rating */}
                 <div className="absolute top-16 left-4 animate-float-slow z-20 rounded-2xl px-3 py-2"
                   style={{
-                    background: 'rgba(255,255,255,0.92)',
+                    background: 'rgba(255,255,255,0.94)',
                     backdropFilter: 'blur(16px)',
-                    border: '1px solid rgba(255,255,255,0.90)',
+                    border: '1px solid rgba(255,255,255,0.92)',
                     boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
                     animationDelay: '2s',
                   }}
@@ -382,10 +390,10 @@ export default function ExplorePage() {
           </div>
         </div>
 
-        {/* ── Trust bar below hero ── */}
-        <div className="border-t border-slate-100 bg-white py-5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-xs text-slate-400 font-medium">
+        {/* ── Pinned Bottom Bar: Trust badges & Smooth Scroll Down cue ── */}
+        <div className="border-t border-slate-100/90 bg-white/95 backdrop-blur-sm py-4 shrink-0 z-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-xs text-slate-400 font-medium">
               <span className="text-slate-300 font-semibold uppercase tracking-widest text-[10px]">Trusted by teams using</span>
               {['React', 'Next.js', 'Laravel', 'Figma', 'Shopify', 'WordPress'].map((tech) => (
                 <span key={tech} className="text-slate-500 font-semibold hover:text-indigo-600 transition-colors cursor-default">
@@ -393,6 +401,16 @@ export default function ExplorePage() {
                 </span>
               ))}
             </div>
+            <button
+              type="button"
+              onClick={() => {
+                document.getElementById('services-catalog')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-colors py-1 cursor-pointer group"
+            >
+              <span>Explore Marketplace</span>
+              <ChevronDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
+            </button>
           </div>
         </div>
       </section>
