@@ -4,7 +4,7 @@ spring:
       on-profile: prod
 
   datasource:
-    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:marketforge}?createDatabaseIfNotExist=false&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:marketforge}?createDatabaseIfNotExist=false&sslMode=VERIFY_IDENTITY&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: ${DB_USERNAME:marketforge}
     password: ${DB_PASSWORD:marketforge_secure_prod_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
