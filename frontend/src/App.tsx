@@ -5,7 +5,9 @@ import MainLayout from '@/layouts/MainLayout';
 import AuthModal from '@/components/modals/AuthModal';
 
 // ──── Code-Splitting: Lazy-loaded pages for fast initial bundle load ────
-const ExplorePage = lazy(() => import('@/pages/ExplorePage'));
+const HomePage = lazy(() => import('@/pages/HomePage'));
+const ServicesPage = lazy(() => import('@/pages/ServicesPage'));
+const ContactPage = lazy(() => import('@/pages/ContactPage'));
 const ListingDetailPage = lazy(() => import('@/pages/ListingDetailPage'));
 const OrdersPage = lazy(() => import('@/pages/OrdersPage'));
 const OrderWorkspacePage = lazy(() => import('@/pages/OrderWorkspacePage'));
@@ -49,8 +51,11 @@ export default function App() {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<ExplorePage />} />
-            <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/explore" element={<ServicesPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/jobs" element={<JobBoardPage />} />
             <Route path="/jobs/new" element={
               <ProtectedRoute><PostJobPage /></ProtectedRoute>

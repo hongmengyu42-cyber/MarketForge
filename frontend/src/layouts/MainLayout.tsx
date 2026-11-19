@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore, useUIStore } from '@/store';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { notificationsApi, messagingApi, authApi } from '@/api';
@@ -30,6 +30,7 @@ export default function MainLayout() {
   const { isAuthenticated, user, logout, updateUser } = useAuthStore();
   const { openModal } = useUIStore();
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
 
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -252,27 +253,63 @@ export default function MainLayout() {
               {/* Primary Nav Links */}
               <nav className="hidden lg:flex items-center gap-6 shrink-0">
                 <Link
-                  to="/explore"
-                  className="text-sm font-semibold text-gray-600 hover:text-primary-600 transition-colors whitespace-nowrap"
+                  to="/"
+                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
+                    location.pathname === '/' || location.pathname === '/home'
+                      ? 'text-primary-600 font-bold'
+                      : 'text-gray-600 hover:text-primary-600'
+                  }`}
                 >
-                  Explore
+                  Home
+                </Link>
+                <Link
+                  to="/services"
+                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
+                    location.pathname === '/services' || location.pathname === '/explore'
+                      ? 'text-primary-600 font-bold'
+                      : 'text-gray-600 hover:text-primary-600'
+                  }`}
+                >
+                  Services
                 </Link>
                 <Link
                   to="/jobs"
-                  className="text-sm font-semibold text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1.5 whitespace-nowrap"
+                  className={`text-sm font-semibold transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                    location.pathname.startsWith('/jobs')
+                      ? 'text-primary-600 font-bold'
+                      : 'text-gray-600 hover:text-primary-600'
+                  }`}
                 >
                   <Briefcase size={15} /> Job Board
                 </Link>
                 <Link
                   to="/assessments"
-                  className="text-sm font-semibold text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1.5 whitespace-nowrap"
+                  className={`text-sm font-semibold transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                    location.pathname === '/assessments'
+                      ? 'text-primary-600 font-bold'
+                      : 'text-gray-600 hover:text-primary-600'
+                  }`}
                 >
                   <Award size={15} /> Skill Badges
+                </Link>
+                <Link
+                  to="/contact"
+                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
+                    location.pathname === '/contact'
+                      ? 'text-primary-600 font-bold'
+                      : 'text-gray-600 hover:text-primary-600'
+                  }`}
+                >
+                  Contact Us
                 </Link>
                 {isAuthenticated && (
                   <Link
                     to="/orders"
-                    className="text-sm font-semibold text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1.5 whitespace-nowrap"
+                    className={`text-sm font-semibold transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                      location.pathname.startsWith('/orders')
+                        ? 'text-primary-600 font-bold'
+                        : 'text-gray-600 hover:text-primary-600'
+                    }`}
                   >
                     <ShoppingBag size={15} /> Orders
                   </Link>
@@ -583,25 +620,49 @@ export default function MainLayout() {
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1 shadow-lg animate-in slide-in-from-top-2 duration-150">
             <Link
-              to="/explore"
+              to="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50"
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold ${
+                location.pathname === '/' ? 'text-primary-600 bg-primary-50/50' : 'text-gray-700 hover:bg-gray-50'
+              }`}
             >
-              Explore Services
+              Home
+            </Link>
+            <Link
+              to="/services"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold ${
+                location.pathname === '/services' || location.pathname === '/explore' ? 'text-primary-600 bg-primary-50/50' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              Services
             </Link>
             <Link
               to="/jobs"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50"
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold ${
+                location.pathname.startsWith('/jobs') ? 'text-primary-600 bg-primary-50/50' : 'text-gray-700 hover:bg-gray-50'
+              }`}
             >
               <Briefcase size={16} /> Job Board
             </Link>
             <Link
               to="/assessments"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50"
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold ${
+                location.pathname === '/assessments' ? 'text-primary-600 bg-primary-50/50' : 'text-gray-700 hover:bg-gray-50'
+              }`}
             >
               <Award size={16} /> Skill Badges
+            </Link>
+            <Link
+              to="/contact"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold ${
+                location.pathname === '/contact' ? 'text-primary-600 bg-primary-50/50' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              Contact Us
             </Link>
             {isAuthenticated && (
               <>
@@ -639,9 +700,11 @@ export default function MainLayout() {
         )}
       </header>
 
-      {/* Main Content */}
+      {/* Main Content with Route Transition Automation */}
       <main className="flex-1">
-        <Outlet />
+        <div key={location.pathname} className="animate-page-enter w-full">
+          <Outlet />
+        </div>
       </main>
 
       {/* Footer */}
