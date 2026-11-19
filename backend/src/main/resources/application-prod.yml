@@ -4,16 +4,16 @@ spring:
       on-profile: prod
 
   datasource:
-    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:marketforge}?createDatabaseIfNotExist=false&sslMode=VERIFY_IDENTITY&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: ${SPRING_DATASOURCE_URL:${DATABASE_URL:jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:4000}/${DB_NAME:marketforge}?createDatabaseIfNotExist=true&sslMode=VERIFY_IDENTITY&serverTimezone=UTC&allowPublicKeyRetrieval=true&enabledTLSProtocols=TLSv1.2,TLSv1.3}}
     username: ${DB_USERNAME:marketforge}
     password: ${DB_PASSWORD:marketforge_secure_prod_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       pool-name: MarketForgeHikariPool
-      maximum-pool-size: 20
-      minimum-idle: 5
+      maximum-pool-size: 10
+      minimum-idle: 2
       idle-timeout: 300000
-      connection-timeout: 20000
+      connection-timeout: 30000
       max-lifetime: 1200000
       leak-detection-threshold: 20000
 

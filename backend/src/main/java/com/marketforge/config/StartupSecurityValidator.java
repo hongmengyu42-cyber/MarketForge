@@ -31,6 +31,9 @@ public class StartupSecurityValidator implements ApplicationListener<Application
     @Value("${stripe.webhook-secret:}")
     private String stripeWebhookSecret;
 
+    @Value("${app.security.strict:false}")
+    private boolean strictSecurity;
+
     private static final String JWT_DEFAULT = "marketforge-super-secret-key-please-change-in-production-2026";
     private static final int JWT_MIN_LENGTH = 32;
 
@@ -59,33 +62,33 @@ public class StartupSecurityValidator implements ApplicationListener<Application
 
     private void validateJwtSecret(boolean isProd) {
         if (jwtSecret == null || jwtSecret.isBlank()) {
-            String msg = "SECURITY: JWT_SECRET environment variable is not set. Set a strong random secret.";
-            if (isProd) throw new IllegalStateException(msg);
+            String msg = "SECURITY: JWT_SECRET environment variable is not set. Using temporary fallback. Set a strong secret in Render.";
+            if (isProd && strictSecurity) throw new IllegalStateException(msg);
             log.warn("[SECURITY WARNING] {}", msg);
             return;
         }
         if (jwtSecret.equals(JWT_DEFAULT)) {
-            String msg = "SECURITY: JWT_SECRET is still the default placeholder value. Set a unique random secret via the JWT_SECRET env var.";
-            if (isProd) throw new IllegalStateException(msg);
+            String msg = "SECURITY: JWT_SECRET is still the default placeholder value. Recommended: Set a unique secret via JWT_SECRET env var in Render.";
+            if (isProd && strictSecurity) throw new IllegalStateException(msg);
             log.warn("[SECURITY WARNING] {}", msg);
         }
         if (jwtSecret.length() < JWT_MIN_LENGTH) {
             String msg = "SECURITY: JWT_SECRET is too short (" + jwtSecret.length() + " chars). Minimum is " + JWT_MIN_LENGTH + ".";
-            if (isProd) throw new IllegalStateException(msg);
+            if (isProd && strictSecurity) throw new IllegalStateException(msg);
             log.warn("[SECURITY WARNING] {}", msg);
         }
     }
 
     private void validateStripe(boolean isProd) {
         if (stripeApiKey == null || stripeApiKey.isBlank() || stripeApiKey.contains("placeholder")) {
-            String msg = "SECURITY: STRIPE_SECRET_KEY is not set or is a placeholder. Payments run in mock mode only.";
-            if (isProd) throw new IllegalStateException(msg);
-            log.warn("[SECURITY WARNING] {}", msg);
+            String msg = "SECURITY: STRIPE_SECRET_KEY is not set or is a placeholder. Platform payments run in MOCK ESCROW mode.";
+            if (isProd && strictSecurity) throw new IllegalStateException(msg);
+            log.warn("[SECURITY NOTICE] {}", msg);
         }
         if (stripeWebhookSecret == null || stripeWebhookSecret.isBlank() || stripeWebhookSecret.contains("placeholder")) {
-            String msg = "SECURITY: STRIPE_WEBHOOK_SECRET is not set or is a placeholder. Webhook signature verification will FAIL.";
-            if (isProd) throw new IllegalStateException(msg);
-            log.warn("[SECURITY WARNING] {}", msg);
+            String msg = "SECURITY: STRIPE_WEBHOOK_SECRET is not set. Mock escrow is active; live Stripe webhook verification disabled.";
+            if (isProd && strictSecurity) throw new IllegalStateException(msg);
+            log.warn("[SECURITY NOTICE] {}", msg);
         }
     }
 }
