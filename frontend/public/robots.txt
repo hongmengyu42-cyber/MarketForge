@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Allow: /explore
+Allow: /jobs
+Allow: /listings/
+Allow: /sellers/
+Disallow: /admin
+Disallow: /orders
+Disallow: /wallet
+Disallow: /messages
+Disallow: /seller-studio
+Disallow: /verify-email
+Disallow: /reset-password
+
+Sitemap: https://marketforge.dev/sitemap.xml
