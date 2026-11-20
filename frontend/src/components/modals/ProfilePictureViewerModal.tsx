@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ZoomIn, ZoomOut, Download, Camera, RotateCcw, Maximize2, User as UserIcon } from 'lucide-react';
 import { getInitials } from '@/utils';
 
@@ -92,10 +93,10 @@ export default function ProfilePictureViewerModal({
     document.body.removeChild(link);
   };
 
-  return (
+  return createPortal(
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 select-none animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] w-screen h-screen bg-black/90 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 select-none animate-in fade-in duration-200 overflow-hidden"
     >
       {/* Top Bar */}
       <div
@@ -180,11 +181,11 @@ export default function ProfilePictureViewerModal({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onWheel={handleWheel}
-        className="flex-1 flex items-center justify-center overflow-hidden my-4"
+        className="flex-1 flex items-center justify-center overflow-hidden my-auto w-full"
       >
         {imageUrl ? (
           <div
-            className={`transition-all duration-200 overflow-hidden flex items-center justify-center ${
+            className={`transition-all duration-200 overflow-hidden flex items-center justify-center shrink-0 ${
               isCircleMask
                 ? 'w-72 h-72 sm:w-96 sm:h-96 rounded-full ring-4 ring-white/30 shadow-2xl bg-black/40'
                 : 'max-w-2xl max-h-[70vh] rounded-2xl shadow-2xl bg-black/40'
@@ -209,7 +210,7 @@ export default function ProfilePictureViewerModal({
             />
           </div>
         ) : (
-          <div className="w-72 h-72 sm:w-96 sm:h-96 rounded-full ring-4 ring-white/30 shadow-2xl bg-gradient-to-br from-primary-600 to-indigo-700 flex flex-col items-center justify-center text-white">
+          <div className="w-72 h-72 sm:w-96 sm:h-96 shrink-0 rounded-full ring-4 ring-white/30 shadow-2xl bg-gradient-to-br from-primary-600 to-indigo-700 flex flex-col items-center justify-center text-white">
             <UserIcon size={72} className="opacity-40 mb-2" />
             <span className="text-6xl font-black">{getInitials(userName)}</span>
             <p className="text-sm font-medium text-white/70 mt-3">No custom photo uploaded</p>
@@ -266,6 +267,7 @@ export default function ProfilePictureViewerModal({
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
