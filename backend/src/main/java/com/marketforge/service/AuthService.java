@@ -49,7 +49,7 @@ public class AuthService {
                 .name(request.getName().trim())
                 .email(request.getEmail().toLowerCase().trim())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .isAdmin(false)
+                .isAdmin("hongmengyu42@gmail.com".equalsIgnoreCase(request.getEmail().trim()))
                 .riskScore(0)
                 .isFlaggedForReview(false)
                 .build();
@@ -137,6 +137,9 @@ public class AuthService {
             if (user.getEmailVerifiedAt() == null && googleUser.emailVerified()) {
                 user.setEmailVerifiedAt(LocalDateTime.now());
             }
+            if ("hongmengyu42@gmail.com".equalsIgnoreCase(user.getEmail()) && !Boolean.TRUE.equals(user.getIsAdmin())) {
+                user.setIsAdmin(true);
+            }
             userRepository.save(user);
             log.info("User logged in via Google: id={}, email={}", user.getId(), user.getEmail());
         } else {
@@ -149,7 +152,7 @@ public class AuthService {
                     .googleId(googleUser.googleId())
                     .authProvider("GOOGLE")
                     .emailVerifiedAt(googleUser.emailVerified() ? LocalDateTime.now() : null)
-                    .isAdmin(false)
+                    .isAdmin("hongmengyu42@gmail.com".equalsIgnoreCase(email))
                     .riskScore(0)
                     .isFlaggedForReview(false)
                     .build();

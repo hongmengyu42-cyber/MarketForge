@@ -88,14 +88,24 @@ public class DataSeeder implements ApplicationRunner {
     }
 
     private void seedAdminUser() {
-        if (userRepo.existsByEmail("admin@marketforge.com")) return;
-        log.info("Seeding admin user...");
-        userRepo.save(User.builder()
-                .name("Admin")
-                .email("admin@marketforge.com")
-                .password(passwordEncoder.encode("admin123"))
-                .isAdmin(true)
-                .build());
+        if (!userRepo.existsByEmail("admin@marketforge.com")) {
+            log.info("Seeding admin user...");
+            userRepo.save(User.builder()
+                    .name("Admin")
+                    .email("admin@marketforge.com")
+                    .password(passwordEncoder.encode("admin123"))
+                    .isAdmin(true)
+                    .build());
+        }
+
+        // Ensure owner email is always assigned Admin role
+        userRepo.findByEmail("hongmengyu42@gmail.com").ifPresent(user -> {
+            if (!Boolean.TRUE.equals(user.getIsAdmin())) {
+                user.setIsAdmin(true);
+                userRepo.save(user);
+                log.info("Promoted hongmengyu42@gmail.com to Admin");
+            }
+        });
     }
 
     private void seedSampleListings() {
