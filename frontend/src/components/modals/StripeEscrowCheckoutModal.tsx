@@ -121,7 +121,7 @@ export default function StripeEscrowCheckoutModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+      <div className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-gray-100 dark:border-slate-800 overflow-hidden">
         {/* Header Banner */}
         <div className="bg-linear-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-6 relative">
           <button
@@ -144,29 +144,29 @@ export default function StripeEscrowCheckoutModal({
         </div>
 
         {/* Price Breakdown */}
-        <div className="p-6 bg-slate-50 border-b border-gray-100">
+        <div className="p-6 bg-slate-50 dark:bg-slate-800/50 border-b border-gray-100 dark:border-slate-800">
           <div className="space-y-2 text-xs">
-            <div className="flex justify-between text-gray-600">
+            <div className="flex justify-between text-gray-600 dark:text-slate-400">
               <span>Service / Milestone Amount</span>
-              <span className="font-semibold text-gray-900">{formatPrice(amount, currency)}</span>
+              <span className="font-semibold text-gray-900 dark:text-white">{formatPrice(amount, currency)}</span>
             </div>
-            <div className="flex justify-between text-gray-600">
+            <div className="flex justify-between text-gray-600 dark:text-slate-400">
               <span className="flex items-center gap-1">
                 MarketForge Escrow Protection Fee (5%)
-                <ShieldCheck size={13} className="text-emerald-600 inline" />
+                <ShieldCheck size={13} className="text-emerald-600 dark:text-emerald-400 inline" />
               </span>
-              <span className="font-semibold text-gray-900">{formatPrice(platformFee, currency)}</span>
+              <span className="font-semibold text-gray-900 dark:text-white">{formatPrice(platformFee, currency)}</span>
             </div>
-            <div className="pt-2 border-t border-gray-200 flex justify-between items-center text-sm font-black text-gray-900">
+            <div className="pt-2 border-t border-gray-200 dark:border-slate-700 flex justify-between items-center text-sm font-black text-gray-900 dark:text-white">
               <span>Total Escrow Deposit</span>
-              <span className="text-lg text-primary-600">{formatPrice(totalAmount, currency)}</span>
+              <span className="text-lg text-primary-600 dark:text-primary-400">{formatPrice(totalAmount, currency)}</span>
             </div>
           </div>
 
           {/* Guarantee Pill */}
-          <div className="mt-3.5 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200/60 flex items-start gap-2.5">
-            <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-0.5" />
-            <p className="text-[11px] text-emerald-900 leading-relaxed font-medium">
+          <div className="mt-3.5 p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/40 flex items-start gap-2.5">
+            <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+            <p className="text-[11px] text-emerald-900 dark:text-emerald-300 leading-relaxed font-medium">
               <strong className="font-bold">100% Client Refund Protection:</strong> The freelancer is only paid when you review and confirm the milestones.
             </p>
           </div>
@@ -175,8 +175,8 @@ export default function StripeEscrowCheckoutModal({
         {/* Card Form */}
         <form onSubmit={handlePayment} className="p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
-              <CreditCard size={14} className="text-gray-500" /> Payment Details
+            <label className="text-xs font-bold text-gray-700 dark:text-slate-300 flex items-center gap-1.5">
+              <CreditCard size={14} className="text-gray-500 dark:text-slate-400" /> Payment Details
             </label>
             <button
               type="button"

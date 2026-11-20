@@ -70,28 +70,28 @@ export default function EscrowDemoModal({ isOpen, onClose }: EscrowDemoModalProp
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-6 sm:p-8 border border-slate-100 relative overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-3xl w-full p-6 sm:p-8 border border-slate-100 dark:border-slate-800 relative overflow-hidden flex flex-col max-h-[90vh]">
         {/* Ambient Top Glow */}
         <div className="absolute top-0 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Header */}
-        <div className="flex items-center justify-between pb-5 border-b border-slate-100 relative z-10">
+        <div className="flex items-center justify-between pb-5 border-b border-slate-100 dark:border-slate-800 relative z-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-xs">
+            <div className="w-10 h-10 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-xs">
               <ShieldCheck size={22} />
             </div>
             <div>
-              <h3 className="text-lg font-black text-slate-900 tracking-tight">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white tracking-tight">
                 How MarketForge Autonomous Escrow Works
               </h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Interactive walkthrough of our 4-stage smart contract & milestone engine
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors"
+            className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 transition-colors"
           >
             <X size={18} />
           </button>
@@ -108,19 +108,19 @@ export default function EscrowDemoModal({ isOpen, onClose }: EscrowDemoModalProp
                 onClick={() => setActiveStep(s.id)}
                 className={`p-3 rounded-2xl text-left border transition-all ${
                   isActive
-                    ? 'bg-blue-50/80 border-blue-300 text-blue-900 shadow-xs'
-                    : 'bg-slate-50/60 border-slate-200/60 text-slate-600 hover:bg-slate-100/70'
+                    ? 'bg-blue-50/80 dark:bg-blue-950/50 border-blue-300 dark:border-blue-600 text-blue-900 dark:text-blue-200 shadow-xs'
+                    : 'bg-slate-50/60 dark:bg-slate-800/60 border-slate-200/60 dark:border-slate-700/60 text-slate-600 dark:text-slate-300 hover:bg-slate-100/70 dark:hover:bg-slate-800'
                 }`}
               >
                 <div className="flex items-center gap-2 mb-1.5">
                   <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold ${
-                    isActive ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600'
+                    isActive ? 'bg-blue-600 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
                   }`}>
                     <Icon size={13} />
                   </div>
                   <span className="text-xs font-bold truncate">{s.shortTitle}</span>
                 </div>
-                <div className="text-[10px] text-slate-500 truncate">{s.actor}</div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{s.actor}</div>
               </button>
             );
           })}
@@ -152,29 +152,29 @@ export default function EscrowDemoModal({ isOpen, onClose }: EscrowDemoModalProp
 
           {/* Value Guarantee Pillars */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
-              <div className="flex items-center gap-2 text-blue-700 text-xs font-bold">
+            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 space-y-1">
+              <div className="flex items-center gap-2 text-blue-700 dark:text-blue-400 text-xs font-bold">
                 <ShieldCheck size={16} /> Zero Non-Payment Risk
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 Freelancers never work without verified escrow funds locked in advance.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
-              <div className="flex items-center gap-2 text-indigo-700 text-xs font-bold">
+            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 space-y-1">
+              <div className="flex items-center gap-2 text-indigo-700 dark:text-indigo-400 text-xs font-bold">
                 <Award size={16} /> Legal IP Transfer Deed
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 Automatic cryptographic copyright assignment deeds upon release.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
-              <div className="flex items-center gap-2 text-emerald-700 text-xs font-bold">
+            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 space-y-1">
+              <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 text-xs font-bold">
                 <Wallet size={16} /> Instant Payouts
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 Disbursements clear in 0 seconds with direct bank transfers in 130+ currencies.
               </p>
             </div>
@@ -182,8 +182,8 @@ export default function EscrowDemoModal({ isOpen, onClose }: EscrowDemoModalProp
         </div>
 
         {/* Footer Actions */}
-        <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-4 relative z-10">
-          <div className="text-xs text-slate-500">
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-4 relative z-10">
+          <div className="text-xs text-slate-500 dark:text-slate-400">
             Step {activeStep} of {steps.length}
           </div>
           <div className="flex items-center gap-2">

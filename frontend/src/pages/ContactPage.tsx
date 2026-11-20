@@ -47,17 +47,17 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="w-full bg-slate-50/50 py-12 lg:py-16">
+    <div className="w-full bg-slate-50/50 dark:bg-slate-950 py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-100 mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-800/40 mb-3">
             <MessageSquare size={13} /> We're Here to Help
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
             Contact MarketForge Support
           </h1>
-          <p className="mt-3 text-slate-600 text-base sm:text-lg">
+          <p className="mt-3 text-slate-600 dark:text-slate-400 text-base sm:text-lg">
             Have questions about our milestone escrow, need help with an active order, or want to discuss enterprise partnerships?
           </p>
         </div>
@@ -68,40 +68,40 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-6">
             {/* Quick Cards */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+              <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
                   <Mail size={20} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 text-sm">Email Support</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">Direct contact for general queries</p>
-                  <a href="mailto:support@marketforge.dev" className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 mt-1 inline-block">
+                  <h3 className="font-bold text-slate-900 dark:text-white text-sm">Email Support</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Direct contact for general queries</p>
+                  <a href="mailto:support@marketforge.dev" className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mt-1 inline-block">
                     support@marketforge.dev
                   </a>
                 </div>
               </div>
 
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+              <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                   <Shield size={20} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 text-sm">Escrow & Disputes Desk</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">Priority arbitration for funded orders</p>
-                  <a href="mailto:disputes@marketforge.dev" className="text-xs font-semibold text-emerald-600 hover:text-emerald-800 mt-1 inline-block">
+                  <h3 className="font-bold text-slate-900 dark:text-white text-sm">Escrow & Disputes Desk</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Priority arbitration for funded orders</p>
+                  <a href="mailto:disputes@marketforge.dev" className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 mt-1 inline-block">
                     disputes@marketforge.dev
                   </a>
                 </div>
               </div>
 
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+              <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
                   <Clock size={20} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 text-sm">Response Time</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">Order issues: &lt; 2 hrs SLA</p>
-                  <span className="text-xs font-medium text-purple-700 mt-1 inline-block">
+                  <h3 className="font-bold text-slate-900 dark:text-white text-sm">Response Time</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Order issues: &lt; 2 hrs SLA</p>
+                  <span className="text-xs font-medium text-purple-700 dark:text-purple-400 mt-1 inline-block">
                     24/7 Global Availability
                   </span>
                 </div>
@@ -109,15 +109,15 @@ export default function ContactPage() {
             </div>
 
             {/* Quick FAQs */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs">
-              <h3 className="font-bold text-slate-900 text-base mb-4 flex items-center gap-2">
-                <HelpCircle size={18} className="text-indigo-600" /> Frequently Asked Questions
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
+              <h3 className="font-bold text-slate-900 dark:text-white text-base mb-4 flex items-center gap-2">
+                <HelpCircle size={18} className="text-indigo-600 dark:text-indigo-400" /> Frequently Asked Questions
               </h3>
               <div className="space-y-4">
                 {faqs.map((f, i) => (
-                  <div key={i} className="pb-3 border-b border-slate-100 last:border-b-0 last:pb-0">
-                    <h4 className="text-xs font-bold text-slate-800">{f.q}</h4>
-                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">{f.a}</p>
+                  <div key={i} className="pb-3 border-b border-slate-100 dark:border-slate-800 last:border-b-0 last:pb-0">
+                    <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200">{f.q}</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{f.a}</p>
                   </div>
                 ))}
               </div>
@@ -125,15 +125,15 @@ export default function ContactPage() {
           </div>
 
           {/* Right Column: Contact Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div className="lg:col-span-7 bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
             {isSubmitted ? (
               <div className="text-center py-12 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
                   <CheckCircle2 size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900">Message Received!</h3>
-                <p className="text-slate-500 text-sm max-w-md mx-auto">
-                  Thank you for reaching out, <span className="font-semibold text-slate-800">{name}</span>. A support agent has been assigned to ticket and will follow up with you at <span className="font-semibold text-slate-800">{email}</span>.
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Message Received!</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">
+                  Thank you for reaching out, <span className="font-semibold text-slate-800 dark:text-slate-200">{name}</span>. A support agent has been assigned to ticket and will follow up with you at <span className="font-semibold text-slate-800 dark:text-slate-200">{email}</span>.
                 </p>
                 <div className="pt-4">
                   <button
@@ -152,13 +152,13 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <h2 className="text-xl font-black text-slate-900">Send Us a Message</h2>
-                  <p className="text-xs text-slate-500 mt-1">Fill out the details below and we'll route your ticket to the right department.</p>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white">Send Us a Message</h2>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Fill out the details below and we'll route your ticket to the right department.</p>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                       Your Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -167,11 +167,11 @@ export default function ContactPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Alex Morgan"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 transition-colors"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                       Email Address <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -180,18 +180,18 @@ export default function ContactPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="alex@example.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Inquiry Category</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Inquiry Category</label>
                     <select
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 bg-white"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 transition-colors"
                     >
                       <option value="general">General Support</option>
                       <option value="escrow">Milestone Escrow & Payment</option>
@@ -201,19 +201,19 @@ export default function ContactPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Subject</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Subject</label>
                     <input
                       type="text"
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
                       placeholder="Question regarding order escrow..."
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 transition-colors"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                     Your Message <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -222,7 +222,7 @@ export default function ContactPage() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Describe your question or issue in detail. If this is about an active order, please include the order ID..."
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 resize-none transition-colors"
                   />
                 </div>
 

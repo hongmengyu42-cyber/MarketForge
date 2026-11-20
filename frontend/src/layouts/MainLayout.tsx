@@ -254,7 +254,12 @@ export default function MainLayout() {
                 <img
                   src="/logo.png"
                   alt="MarketForge"
-                  className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-102"
+                  className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-102 dark:hidden"
+                />
+                <img
+                  src="/logo-dark.png"
+                  alt="MarketForge"
+                  className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-102 hidden dark:block"
                 />
               </Link>
             </div>
@@ -768,7 +773,8 @@ export default function MainLayout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <img src="/logo.png" alt="MarketForge" className="h-7 w-auto object-contain opacity-90 dark:brightness-110" />
+              <img src="/logo.png" alt="MarketForge" className="h-7 w-auto object-contain opacity-90 dark:hidden" />
+              <img src="/logo-dark.png" alt="MarketForge" className="h-7 w-auto object-contain opacity-90 hidden dark:block" />
               <span className="text-xs text-gray-300 dark:text-slate-600">|</span>
               <p className="text-xs text-gray-500 dark:text-slate-400">© 2026 MarketForge. All rights reserved.</p>
             </div>

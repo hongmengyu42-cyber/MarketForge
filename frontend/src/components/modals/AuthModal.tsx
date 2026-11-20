@@ -178,7 +178,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content max-w-md w-full relative overflow-hidden" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
-        <div className="modal-header pb-4 border-b border-gray-100 flex items-center justify-between">
+        <div className="modal-header pb-4 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {showGoogleRealEmailInput || showClientIdConfig ? (
               <button
@@ -187,7 +187,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
                   setShowGoogleRealEmailInput(false);
                   setShowClientIdConfig(false);
                 }}
-                className="p-1 rounded-lg hover:bg-gray-100 text-gray-500 mr-1"
+                className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-500 dark:text-slate-400 mr-1"
                 title="Back to login"
               >
                 <ArrowLeft size={18} />
@@ -196,7 +196,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
               <img src="/logo-icon.png" alt="MarketForge" className="w-9 h-9 object-contain shrink-0 rounded-lg shadow-xs" />
             )}
             <div>
-              <h2 className="text-xl font-bold text-gray-900">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                 {showClientIdConfig
                   ? 'Configure Google OAuth'
                   : showGoogleRealEmailInput
@@ -205,7 +205,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
                   ? 'Welcome Back to MarketForge'
                   : 'Create your MarketForge Account'}
               </h2>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">
                 {showClientIdConfig
                   ? 'Connect official Google Cloud Console credentials'
                   : showGoogleRealEmailInput
@@ -218,7 +218,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
           >
             <X size={20} />
           </button>
@@ -242,7 +242,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">
                   Google Client ID (e.g. *.apps.googleusercontent.com)
                 </label>
                 <input
@@ -270,18 +270,18 @@ export default function AuthModal({ onClose }: AuthModalProps) {
           ) : showGoogleRealEmailInput ? (
             /* Register with Real Google Email Form */
             <form onSubmit={handleRealGoogleEmailSubmit} className="space-y-4">
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-start gap-2.5">
-                <CheckCircle2 size={18} className="text-emerald-600 flex-shrink-0 mt-0.5" />
-                <div className="text-xs text-emerald-900">
-                  <p className="font-semibold text-emerald-800">Real Email Registration</p>
-                  <p className="mt-0.5 text-emerald-700">
+              <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 rounded-xl p-3 flex items-start gap-2.5">
+                <CheckCircle2 size={18} className="text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
+                <div className="text-xs text-emerald-900 dark:text-emerald-300">
+                  <p className="font-semibold text-emerald-800 dark:text-emerald-300">Real Email Registration</p>
+                  <p className="mt-0.5 text-emerald-700 dark:text-emerald-400">
                     Enter your real email address. A MarketForge user account and buyer profile will be created and linked to your email immediately.
                   </p>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">Your Full Name</label>
+                <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">Your Full Name</label>
                 <input
                   type="text"
                   value={realGoogleName}
@@ -293,7 +293,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className="block text-xs font-semibold text-gray-700 dark:text-slate-300 mb-1">
                   Your Real Google Email Address
                 </label>
                 <input
@@ -386,8 +386,8 @@ export default function AuthModal({ onClose }: AuthModalProps) {
 
               {/* Divider */}
               <div className="relative flex items-center justify-center my-4">
-                <div className="border-t border-gray-200 w-full"></div>
-                <span className="bg-white px-3 text-xs uppercase tracking-wider text-gray-400 font-medium absolute">
+                <div className="border-t border-gray-200 dark:border-slate-800 w-full"></div>
+                <span className="bg-white dark:bg-slate-900 px-3 text-xs uppercase tracking-wider text-gray-400 dark:text-slate-500 font-medium absolute">
                   or
                 </span>
               </div>
@@ -402,7 +402,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
                     <button
                       type="button"
                       onClick={() => setShowClientIdConfig(true)}
-                      className="text-[11px] text-gray-400 hover:text-blue-600 transition-colors"
+                      className="text-[11px] text-gray-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     >
                       Configured with Google OAuth • <span className="underline">Change ID</span>
                     </button>
@@ -413,7 +413,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
                   type="button"
                   onClick={handleGoogleClick}
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-3 px-4 py-2.5 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 hover:border-gray-400 text-gray-700 font-semibold text-sm shadow-sm transition-all active:scale-[0.99] disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-3 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 hover:border-gray-400 dark:hover:border-slate-600 text-gray-700 dark:text-slate-200 font-semibold text-sm shadow-sm transition-all active:scale-[0.99] disabled:opacity-50 cursor-pointer"
                 >
                   <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
                     <path
@@ -441,13 +441,13 @@ export default function AuthModal({ onClose }: AuthModalProps) {
         </div>
 
         {/* Footer */}
-        <div className="modal-footer justify-center pt-3 border-t border-gray-100 bg-gray-50/50">
-          <p className="text-xs text-gray-600">
+        <div className="modal-footer justify-center pt-3 border-t border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-900/40">
+          <p className="text-xs text-gray-600 dark:text-slate-400">
             {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
             <button
               type="button"
               onClick={switchMode}
-              className="text-primary-600 font-semibold hover:underline"
+              className="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
             >
               {mode === 'login' ? 'Sign Up' : 'Sign In'}
             </button>
