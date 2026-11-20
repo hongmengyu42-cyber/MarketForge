@@ -92,22 +92,20 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={() => openModal('auth')}
-                    className="font-bold text-sm text-white px-7 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/35 cursor-pointer flex items-center gap-2 group"
+                    className="font-bold text-sm text-white px-7 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/35 cursor-pointer"
                     style={{
                       background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
                     }}
                   >
-                    <span>Get Started</span>
-                    <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                    Get Started
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setIsDemoOpen(true)}
-                    className="font-semibold text-sm text-slate-700 bg-slate-100/90 hover:bg-slate-200/80 px-6 py-3.5 rounded-xl transition-all duration-200 cursor-pointer flex items-center gap-2 border border-slate-200/70"
+                    className="font-semibold text-sm text-slate-700 bg-slate-100/90 hover:bg-slate-200/80 px-6 py-3.5 rounded-xl transition-all duration-200 cursor-pointer border border-slate-200/70"
                   >
-                    <Zap size={15} className="text-indigo-600" />
-                    <span>How Escrow Works</span>
+                    How Escrow Works
                   </button>
                 </div>
 

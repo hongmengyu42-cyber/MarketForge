@@ -14,7 +14,6 @@ import {
   User,
   MessageSquare,
   PlusCircle,
-  Briefcase,
   Wallet,
   Award,
   Heart,
@@ -274,23 +273,23 @@ export default function MainLayout() {
                 </Link>
                 <Link
                   to="/jobs"
-                  className={`text-sm font-semibold transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
                     location.pathname.startsWith('/jobs')
                       ? 'text-primary-600 font-bold'
                       : 'text-gray-600 hover:text-primary-600'
                   }`}
                 >
-                  <Briefcase size={15} /> Job Board
+                  Job Board
                 </Link>
                 <Link
                   to="/assessments"
-                  className={`text-sm font-semibold transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
                     location.pathname === '/assessments'
                       ? 'text-primary-600 font-bold'
                       : 'text-gray-600 hover:text-primary-600'
                   }`}
                 >
-                  <Award size={15} /> Skill Badges
+                  Skill Badges
                 </Link>
                 <Link
                   to="/contact"
@@ -305,13 +304,13 @@ export default function MainLayout() {
                 {isAuthenticated && (
                   <Link
                     to="/orders"
-                    className={`text-sm font-semibold transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                    className={`text-sm font-semibold transition-colors whitespace-nowrap ${
                       location.pathname.startsWith('/orders')
                         ? 'text-primary-600 font-bold'
                         : 'text-gray-600 hover:text-primary-600'
                     }`}
                   >
-                    <ShoppingBag size={15} /> Orders
+                    Orders
                   </Link>
                 )}
               </nav>
@@ -640,20 +639,20 @@ export default function MainLayout() {
             <Link
               to="/jobs"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold ${
+              className={`flex items-center px-3 py-2 rounded-xl text-sm font-semibold ${
                 location.pathname.startsWith('/jobs') ? 'text-primary-600 bg-primary-50/50' : 'text-gray-700 hover:bg-gray-50'
               }`}
             >
-              <Briefcase size={16} /> Job Board
+              Job Board
             </Link>
             <Link
               to="/assessments"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold ${
+              className={`flex items-center px-3 py-2 rounded-xl text-sm font-semibold ${
                 location.pathname === '/assessments' ? 'text-primary-600 bg-primary-50/50' : 'text-gray-700 hover:bg-gray-50'
               }`}
             >
-              <Award size={16} /> Skill Badges
+              Skill Badges
             </Link>
             <Link
               to="/contact"
