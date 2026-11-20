@@ -10,7 +10,6 @@ import {
   Check,
   ShieldCheck,
   ChevronDown,
-  ArrowRight,
 } from 'lucide-react';
 import type { Listing } from '@/types';
 import EscrowDemoModal from '@/components/modals/EscrowDemoModal';
@@ -323,10 +322,9 @@ export default function HomePage() {
             </div>
             <Link
               to="/services"
-              className="btn btn-secondary text-xs font-bold self-start sm:self-auto flex items-center gap-1.5 hover:text-indigo-600 transition-colors"
+              className="btn btn-secondary text-xs font-bold self-start sm:self-auto hover:text-indigo-600 transition-colors"
             >
-              <span>Browse All Services</span>
-              <ArrowRight size={14} />
+              Browse All Services
             </Link>
           </div>
 
