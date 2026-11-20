@@ -238,83 +238,82 @@ export default function MainLayout() {
       <header className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 gap-4">
-            {/* Left: Brand & Primary Navigation */}
-            <div className="flex items-center gap-6 lg:gap-8 min-w-0">
-              {/* Brand Logo */}
-              <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+            {/* Left: Brand Logo */}
+            <div className="flex items-center shrink-0">
+              <Link to="/" className="flex items-center gap-2.5 group">
                 <img
                   src="/logo.png"
                   alt="MarketForge"
                   className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-102"
                 />
               </Link>
-
-              {/* Primary Nav Links */}
-              <nav className="hidden lg:flex items-center gap-6 shrink-0">
-                <Link
-                  to="/"
-                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
-                    location.pathname === '/' || location.pathname === '/home'
-                      ? 'text-primary-600 font-bold'
-                      : 'text-gray-600 hover:text-primary-600'
-                  }`}
-                >
-                  Home
-                </Link>
-                <Link
-                  to="/services"
-                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
-                    location.pathname === '/services' || location.pathname === '/explore'
-                      ? 'text-primary-600 font-bold'
-                      : 'text-gray-600 hover:text-primary-600'
-                  }`}
-                >
-                  Services
-                </Link>
-                <Link
-                  to="/jobs"
-                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
-                    location.pathname.startsWith('/jobs')
-                      ? 'text-primary-600 font-bold'
-                      : 'text-gray-600 hover:text-primary-600'
-                  }`}
-                >
-                  Job Board
-                </Link>
-                <Link
-                  to="/assessments"
-                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
-                    location.pathname === '/assessments'
-                      ? 'text-primary-600 font-bold'
-                      : 'text-gray-600 hover:text-primary-600'
-                  }`}
-                >
-                  Skill Badges
-                </Link>
-                <Link
-                  to="/contact"
-                  className={`text-sm font-semibold transition-colors whitespace-nowrap ${
-                    location.pathname === '/contact'
-                      ? 'text-primary-600 font-bold'
-                      : 'text-gray-600 hover:text-primary-600'
-                  }`}
-                >
-                  Contact Us
-                </Link>
-                {isAuthenticated && (
-                  <Link
-                    to="/orders"
-                    className={`text-sm font-semibold transition-colors whitespace-nowrap ${
-                      location.pathname.startsWith('/orders')
-                        ? 'text-primary-600 font-bold'
-                        : 'text-gray-600 hover:text-primary-600'
-                    }`}
-                  >
-                    Orders
-                  </Link>
-                )}
-              </nav>
             </div>
+
+            {/* Center: Primary Navigation (Centered & Balanced) */}
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5">
+              <Link
+                to="/"
+                className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
+                  location.pathname === '/' || location.pathname === '/home'
+                    ? 'bg-slate-100 text-slate-900 font-semibold shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                Home
+              </Link>
+              <Link
+                to="/services"
+                className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
+                  location.pathname === '/services' || location.pathname === '/explore'
+                    ? 'bg-slate-100 text-slate-900 font-semibold shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                Services
+              </Link>
+              <Link
+                to="/jobs"
+                className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
+                  location.pathname.startsWith('/jobs')
+                    ? 'bg-slate-100 text-slate-900 font-semibold shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                Job Board
+              </Link>
+              <Link
+                to="/assessments"
+                className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
+                  location.pathname === '/assessments'
+                    ? 'bg-slate-100 text-slate-900 font-semibold shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                Skill Badges
+              </Link>
+              <Link
+                to="/contact"
+                className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
+                  location.pathname === '/contact'
+                    ? 'bg-slate-100 text-slate-900 font-semibold shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                Contact Us
+              </Link>
+              {isAuthenticated && (
+                <Link
+                  to="/orders"
+                  className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
+                    location.pathname.startsWith('/orders')
+                      ? 'bg-slate-100 text-slate-900 font-semibold shadow-2xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  Orders
+                </Link>
+              )}
+            </nav>
 
             {/* Right: Actions, Utilities & Profile */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -593,10 +592,16 @@ export default function MainLayout() {
                 </>
               ) : (
                 <>
-                  <button onClick={() => openModal('auth')} className="btn-secondary btn-sm">
+                  <button
+                    onClick={() => openModal('auth')}
+                    className="text-sm font-semibold text-slate-700 hover:text-slate-900 px-3.5 py-2 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
+                  >
                     Sign In
                   </button>
-                  <button onClick={() => openModal('auth')} className="btn-primary btn-sm">
+                  <button
+                    onClick={() => openModal('auth')}
+                    className="text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 px-4 py-2 rounded-xl transition-all shadow-xs hover:shadow cursor-pointer"
+                  >
                     Get Started
                   </button>
                 </>

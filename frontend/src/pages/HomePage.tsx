@@ -59,9 +59,8 @@ export default function HomePage() {
               {/* ── LEFT: Copy Column ── */}
               <div className="space-y-6 max-w-2xl animate-fade-up">
                 {/* Micro badge */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-100/80 shadow-2xs">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Next-Gen Smart Escrow Freelance Marketplace</span>
+                <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-100/80">
+                  Next-Gen Smart Escrow Freelance Marketplace
                 </div>
 
                 {/* Headline — STRICTLY 2 LINES */}
@@ -460,25 +459,26 @@ export default function HomePage() {
       </section>
 
       {/* ──── Section 4: Call to Action Banner ──── */}
-      <section className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 py-16 text-white text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
+      <section className="relative overflow-hidden bg-slate-950 py-16 lg:py-20 text-white text-center border-t border-slate-800">
+        <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
             Ready to Build or Offer Services on MarketForge?
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             Join thousands of developers, designers, and fast-moving companies collaborating safely with smart escrow contracts.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-3">
             <button
               type="button"
               onClick={() => openModal('auth')}
-              className="font-bold text-sm text-slate-900 bg-white hover:bg-slate-100 px-8 py-3.5 rounded-xl transition-all shadow-lg cursor-pointer"
+              className="font-bold text-sm text-slate-900 bg-white hover:bg-slate-100 px-7 py-3 rounded-xl transition-all shadow-md hover:shadow-lg cursor-pointer"
             >
               Get Started Now
             </button>
             <Link
               to="/jobs/new"
-              className="font-bold text-sm text-white bg-indigo-600/80 hover:bg-indigo-600 border border-indigo-400/40 px-8 py-3.5 rounded-xl transition-all cursor-pointer"
+              className="font-semibold text-sm text-white bg-white/10 hover:bg-white/15 border border-white/20 px-7 py-3 rounded-xl transition-all cursor-pointer"
             >
               Post a Job
             </Link>

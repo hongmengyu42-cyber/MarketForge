@@ -223,25 +223,26 @@ export default function AboutPage() {
       </section>
 
       {/* ──── Call to Action ──── */}
-      <section className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 py-16 text-white text-center">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
+      <section className="relative overflow-hidden bg-slate-950 py-16 lg:py-20 text-white text-center border-t border-slate-800">
+        <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
             Ready to Experience Risk-Free Freelancing?
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base max-w-lg mx-auto">
+          <p className="text-slate-300 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
             Whether you are building your next product or offering specialized technical services, MarketForge protects every milestone.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-3">
             <button
               type="button"
               onClick={() => openModal('auth')}
-              className="font-bold text-sm text-slate-900 bg-white hover:bg-slate-100 px-8 py-3.5 rounded-xl transition-all shadow-lg cursor-pointer"
+              className="font-bold text-sm text-slate-900 bg-white hover:bg-slate-100 px-7 py-3 rounded-xl transition-all shadow-md hover:shadow-lg cursor-pointer"
             >
               Create Free Account
             </button>
             <Link
               to="/services"
-              className="font-bold text-sm text-white bg-indigo-600/80 hover:bg-indigo-600 border border-indigo-400/40 px-8 py-3.5 rounded-xl transition-all cursor-pointer"
+              className="font-semibold text-sm text-white bg-white/10 hover:bg-white/15 border border-white/20 px-7 py-3 rounded-xl transition-all cursor-pointer"
             >
               Explore Services
             </Link>

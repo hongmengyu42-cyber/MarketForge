@@ -11,7 +11,6 @@ import {
   DollarSign,
   Clock,
   Layers,
-  Sparkles,
   ChevronRight,
   ShieldCheck,
   PlusCircle,
@@ -60,34 +59,32 @@ export default function JobBoardPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* ──── HERO SECTION ──── */}
-      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-blue-900 via-indigo-900 to-primary-900 text-white p-8 sm:p-12 shadow-xl">
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff15_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+      <div className="relative rounded-3xl overflow-hidden bg-slate-950 text-white p-8 sm:p-12 shadow-xl border border-slate-800">
+        <div className="absolute inset-0 bg-[radial-gradient(#ffffff0d_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold text-primary-200 border border-white/10">
-            <Sparkles size={14} className="text-amber-400" />
-            <span>MarketForge Client Job Board</span>
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold text-indigo-200 border border-white/15">
+            MarketForge Client Job Board
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-white">
             Find High-Paying Freelance Projects & Custom Contracts
           </h1>
 
-          <p className="text-sm sm:text-base text-gray-300 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
             Browse verified client job postings, submit tailored proposals, and secure guaranteed milestone payments held in MarketForge Escrow.
           </p>
 
           <div className="pt-2 flex flex-wrap gap-3">
             <button
               onClick={handlePostJobClick}
-              className="px-6 py-3 rounded-2xl bg-white text-gray-900 font-bold text-sm hover:bg-gray-100 transition-all flex items-center gap-2 shadow-lg hover:shadow-xl active:scale-95"
+              className="px-6 py-3 rounded-xl bg-white text-slate-900 font-bold text-sm hover:bg-slate-100 transition-all shadow-md cursor-pointer"
             >
-              <PlusCircle size={18} className="text-primary-600" />
-              <span>Post a Job as a Client</span>
+              Post a Job as a Client
             </button>
             <Link
-              to="/explore"
-              className="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition-all border border-white/15"
+              to="/services"
+              className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-all border border-white/20"
             >
               Explore Gigs & Services
             </Link>

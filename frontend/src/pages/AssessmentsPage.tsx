@@ -13,7 +13,6 @@ import {
   Award,
   CheckCircle2,
   Clock,
-  ShieldCheck,
   ArrowRight,
   RotateCcw,
   X,
@@ -142,11 +141,11 @@ export default function AssessmentsPage() {
       <div className="max-w-6xl mx-auto space-y-10">
 
         {/* Hero Section */}
-        <div className="relative rounded-3xl bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-900 text-white p-8 sm:p-12 overflow-hidden shadow-xl border border-indigo-900/50">
-          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 bg-primary-600/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative rounded-3xl bg-slate-950 text-white p-8 sm:p-12 overflow-hidden shadow-xl border border-slate-800">
+          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 max-w-2xl space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" /> MarketForge Verified Skill Credentials
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/25">
+              MarketForge Verified Skill Credentials
             </span>
             <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
               Prove Your Skills. Win High-Paying Clients.

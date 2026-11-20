@@ -13,7 +13,6 @@ import {
   LayoutGrid,
   List as ListIcon,
   RotateCcw,
-  Sparkles,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { Listing, Category } from '@/types';
@@ -118,8 +117,8 @@ export default function ServicesPage() {
       <section className="bg-white border-b border-gray-200 py-10 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-100 mb-3">
-              <Sparkles size={13} /> Verified Freelance Marketplace
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-100 mb-3">
+              Verified Freelance Marketplace
             </span>
             <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
               Explore Professional Services
