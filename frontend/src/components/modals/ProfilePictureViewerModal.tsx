@@ -28,14 +28,16 @@ export default function ProfilePictureViewerModal({
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [initialPan, setInitialPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [hasImageError, setHasImageError] = useState<boolean>(false);
 
   // Reset zoom and pan on open
   useEffect(() => {
     if (isOpen) {
       setZoom(1);
       setPan({ x: 0, y: 0 });
+      setHasImageError(false);
     }
-  }, [isOpen]);
+  }, [isOpen, imageUrl]);
 
   // Keyboard shortcut: Escape to close
   useEffect(() => {
@@ -183,7 +185,7 @@ export default function ProfilePictureViewerModal({
         onWheel={handleWheel}
         className="flex-1 flex items-center justify-center overflow-hidden my-auto w-full"
       >
-        {imageUrl ? (
+        {imageUrl && !hasImageError ? (
           <div
             className={`transition-all duration-200 overflow-hidden flex items-center justify-center shrink-0 ${
               isCircleMask
@@ -201,6 +203,7 @@ export default function ProfilePictureViewerModal({
             <img
               src={imageUrl}
               alt={userName}
+              onError={() => setHasImageError(true)}
               style={{
                 transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
                 transition: isDragging ? 'none' : 'transform 150ms ease-out',
@@ -213,7 +216,7 @@ export default function ProfilePictureViewerModal({
           <div className="w-72 h-72 sm:w-96 sm:h-96 shrink-0 rounded-full ring-4 ring-white/30 shadow-2xl bg-gradient-to-br from-primary-600 to-indigo-700 flex flex-col items-center justify-center text-white">
             <UserIcon size={72} className="opacity-40 mb-2" />
             <span className="text-6xl font-black">{getInitials(userName)}</span>
-            <p className="text-sm font-medium text-white/70 mt-3">No custom photo uploaded</p>
+            <p className="text-sm font-medium text-white/70 mt-3">{hasImageError ? 'Unable to load photo' : 'No custom photo uploaded'}</p>
           </div>
         )}
       </div>
@@ -223,7 +226,7 @@ export default function ProfilePictureViewerModal({
         onClick={(e) => e.stopPropagation()}
         className="w-full max-w-sm mx-auto flex items-center justify-center gap-3 z-10 py-2"
       >
-        {imageUrl && (
+        {imageUrl && !hasImageError && (
           <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center gap-4 text-white text-xs border border-white/10 shadow-lg">
             <button
               type="button"

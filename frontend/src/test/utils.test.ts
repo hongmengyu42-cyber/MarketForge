@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatPrice, getInitials, getStatusColor, formatRelativeTime, cn } from '../utils';
+import { formatPrice, getInitials, getStatusColor, formatRelativeTime, cn, getMediaUrl } from '../utils';
 
 describe('Utility Functions', () => {
   describe('cn (Tailwind class merger)', () => {
@@ -86,6 +86,29 @@ describe('Utility Functions', () => {
     it('returns hours ago for dates within 24 hours', () => {
       const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
       expect(formatRelativeTime(twoHoursAgo)).toBe('2h ago');
+    });
+  });
+
+  describe('getMediaUrl', () => {
+    it('returns empty string for null or undefined path', () => {
+      expect(getMediaUrl(null)).toBe('');
+      expect(getMediaUrl(undefined)).toBe('');
+      expect(getMediaUrl('')).toBe('');
+    });
+
+    it('returns absolute http and https URLs untouched', () => {
+      expect(getMediaUrl('https://example.com/avatar.jpg')).toBe('https://example.com/avatar.jpg');
+      expect(getMediaUrl('http://example.com/avatar.jpg')).toBe('http://example.com/avatar.jpg');
+    });
+
+    it('returns data and blob URLs untouched', () => {
+      expect(getMediaUrl('data:image/png;base64,xxxx')).toBe('data:image/png;base64,xxxx');
+      expect(getMediaUrl('blob:http://localhost:5173/xxxx')).toBe('blob:http://localhost:5173/xxxx');
+    });
+
+    it('resolves relative path correctly', () => {
+      const res = getMediaUrl('/uploads/avatars/avatar_1.png');
+      expect(res).toContain('/uploads/avatars/avatar_1.png');
     });
   });
 });

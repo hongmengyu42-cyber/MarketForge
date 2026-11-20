@@ -48,3 +48,25 @@ export function getStatusColor(status: string): string {
 export function getInitials(name: string): string {
   return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
 }
+
+/**
+ * Normalizes an uploaded or remote media URL.
+ * Converts relative paths like /uploads/avatars/... into absolute URLs pointing to the backend.
+ */
+export function getMediaUrl(path?: string | null): string {
+  if (!path) return '';
+  if (
+    path.startsWith('http://') ||
+    path.startsWith('https://') ||
+    path.startsWith('data:') ||
+    path.startsWith('blob:')
+  ) {
+    return path;
+  }
+  const apiUrl = import.meta.env.VITE_API_URL || '';
+  if (apiUrl && apiUrl.startsWith('http')) {
+    const backendOrigin = apiUrl.replace(/\/api\/v1\/?$/, '').replace(/\/api\/?$/, '');
+    return `${backendOrigin}${path.startsWith('/') ? '' : '/'}${path}`;
+  }
+  return path;
+}

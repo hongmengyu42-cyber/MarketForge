@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ordersApi, reviewsApi, disputesApi, vaultApi } from '@/api';
 import { useAuthStore } from '@/store';
-import { formatPrice, formatDate, getStatusColor, getInitials } from '@/utils';
+import { formatPrice, formatDate, getStatusColor, getInitials, getMediaUrl } from '@/utils';
 import type { Order, OrderMilestone, OrderReviewStatus, CreateReviewData } from '@/types';
 import IpCertificateModal from '@/components/modals/IpCertificateModal';
 import {
@@ -573,14 +573,16 @@ export default function OrderWorkspacePage() {
           {/* Right: Counterparty Card */}
           <div className="border border-gray-100 rounded-2xl p-4 bg-gray-50/50 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="avatar w-12 h-12 text-sm font-bold bg-primary-100 text-primary-700 rounded-2xl ring-2 ring-white shadow-xs">
-                {isBuyer
-                  ? order.seller?.avatarUrl ? (
-                      <img src={order.seller.avatarUrl} alt="Seller" className="w-full h-full object-cover rounded-2xl" />
-                    ) : getInitials(order.seller?.displayName || order.seller?.name || 'S')
-                  : order.buyer?.avatarUrl ? (
-                      <img src={order.buyer.avatarUrl} alt="Buyer" className="w-full h-full object-cover rounded-2xl" />
-                    ) : getInitials(order.buyer?.name || 'B')}
+              <div className="avatar w-12 h-12 text-sm font-bold bg-primary-100 text-primary-700 rounded-2xl ring-2 ring-white shadow-xs relative overflow-hidden flex items-center justify-center">
+                <span>{isBuyer ? getInitials(order.seller?.displayName || order.seller?.name || 'S') : getInitials(order.buyer?.name || 'B')}</span>
+                {(isBuyer ? order.seller?.avatarUrl : order.buyer?.avatarUrl) && (
+                  <img
+                    src={getMediaUrl(isBuyer ? order.seller?.avatarUrl : order.buyer?.avatarUrl)}
+                    alt={isBuyer ? 'Seller' : 'Buyer'}
+                    onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
+                    className="w-full h-full object-cover rounded-2xl absolute inset-0"
+                  />
+                )}
               </div>
               <div>
                 <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">

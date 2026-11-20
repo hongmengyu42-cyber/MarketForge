@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { sellerApi, messagingApi, portfolioApi, assessmentsApi, reviewsApi } from '@/api';
 import { useAuthStore, useUIStore } from '@/store';
-import { formatPrice, formatDate, getInitials } from '@/utils';
+import { formatPrice, formatDate, getInitials, getMediaUrl } from '@/utils';
 import {
   Star,
   Clock,
@@ -58,6 +58,7 @@ export default function PublicSellerProfilePage() {
   const [messageOpen, setMessageOpen] = useState(false);
   const [messageBody, setMessageBody] = useState('');
   const [isAvatarViewerOpen, setIsAvatarViewerOpen] = useState(false);
+  const [avatarLoadError, setAvatarLoadError] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState<PortfolioItem | null>(null);
 
   // Fetch public seller details
@@ -187,10 +188,11 @@ export default function PublicSellerProfilePage() {
                 className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl ring-4 ring-white shadow-xl overflow-hidden bg-white flex items-center justify-center cursor-pointer relative"
                 title="Click to view profile picture"
               >
-                {seller.avatarUrl ? (
+                {seller.avatarUrl && !avatarLoadError ? (
                   <img
-                    src={seller.avatarUrl}
+                    src={getMediaUrl(seller.avatarUrl)}
                     alt={seller.displayName}
+                    onError={() => setAvatarLoadError(true)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
@@ -836,7 +838,7 @@ export default function PublicSellerProfilePage() {
       <ProfilePictureViewerModal
         isOpen={isAvatarViewerOpen}
         onClose={() => setIsAvatarViewerOpen(false)}
-        imageUrl={seller?.avatarUrl}
+        imageUrl={getMediaUrl(seller?.avatarUrl)}
         userName={seller?.displayName || seller?.name || 'Freelancer'}
         userRole="Freelancer Pro"
         isOwnProfile={user?.id === seller?.id}

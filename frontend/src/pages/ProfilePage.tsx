@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { authApi, listingsApi, uploadApi, portfolioApi, assessmentsApi } from '@/api';
 import { useAuthStore } from '@/store';
-import { formatDate, formatPrice, getInitials } from '@/utils';
+import { formatDate, formatPrice, getInitials, getMediaUrl } from '@/utils';
 import {
   User as UserIcon,
   Mail,
@@ -118,6 +118,16 @@ export default function ProfilePage() {
   const [hourlyRate, setHourlyRate] = useState<number | ''>(profileUser?.sellerProfile?.hourlyRate || '');
   const currentAvatar = profileUser?.avatarUrl || profileUser?.sellerProfile?.avatarUrl || '';
   const [avatarUrl, setAvatarUrl] = useState(currentAvatar);
+  const [avatarLoadError, setAvatarLoadError] = useState(false);
+  const [editAvatarLoadError, setEditAvatarLoadError] = useState(false);
+
+  useEffect(() => {
+    setAvatarLoadError(false);
+  }, [currentAvatar]);
+
+  useEffect(() => {
+    setEditAvatarLoadError(false);
+  }, [avatarUrl]);
 
   // Avatar Modal State
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
@@ -478,10 +488,11 @@ export default function ProfilePage() {
                 className="w-32 h-32 sm:w-40 sm:h-40 rounded-full ring-4 ring-white shadow-2xl overflow-hidden bg-white flex items-center justify-center cursor-pointer relative"
                 title="Click to view full photo"
               >
-                {currentAvatar ? (
+                {currentAvatar && !avatarLoadError ? (
                   <img
-                    src={currentAvatar}
+                    src={getMediaUrl(currentAvatar)}
                     alt={profileUser?.name}
+                    onError={() => setAvatarLoadError(true)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
@@ -1240,8 +1251,13 @@ export default function ProfilePage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <div className="relative w-16 h-16 rounded-2xl ring-2 ring-primary-100 overflow-hidden bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                    {avatarUrl ? (
-                      <img src={avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
+                    {avatarUrl && !editAvatarLoadError ? (
+                      <img
+                        src={getMediaUrl(avatarUrl)}
+                        alt="Avatar"
+                        onError={() => setEditAvatarLoadError(true)}
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-primary-600 to-indigo-700 text-white flex items-center justify-center text-xl font-bold">
                         {getInitials(name || 'U')}
@@ -1283,7 +1299,7 @@ export default function ProfilePage() {
                     <button
                       type="button"
                       onClick={() => {
-                        setCropImageSrc(avatarUrl);
+                        setCropImageSrc(getMediaUrl(avatarUrl));
                         setIsCropping(true);
                         setIsAvatarModalOpen(true);
                       }}
@@ -2125,7 +2141,7 @@ export default function ProfilePage() {
       <ProfilePictureViewerModal
         isOpen={isViewerOpen}
         onClose={() => setIsViewerOpen(false)}
-        imageUrl={currentAvatar}
+        imageUrl={getMediaUrl(currentAvatar)}
         userName={profileUser?.sellerProfile?.displayName || profileUser?.name || 'User'}
         userRole={profileUser?.isAdmin ? 'Admin' : (isSeller ? 'Freelancer' : 'Buyer')}
         isOwnProfile={true}

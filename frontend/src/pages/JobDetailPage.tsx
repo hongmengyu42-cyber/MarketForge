@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { jobsApi, messagingApi } from '@/api';
 import { useAuthStore, useUIStore } from '@/store';
-import { formatPrice, formatDate, getInitials } from '@/utils';
+import { formatPrice, formatDate, getInitials, getMediaUrl } from '@/utils';
 import type { JobPost, JobProposal } from '@/types';
 import {
   Briefcase,
@@ -412,11 +412,15 @@ export default function JobDetailPage() {
               <h3 className="text-base font-bold text-gray-900 border-b pb-3">About the Client</h3>
 
               <div className="flex items-center gap-3">
-                <div className="avatar w-12 h-12 text-sm font-bold bg-primary-100 text-primary-700 rounded-2xl ring-2 ring-white shadow-xs">
-                  {job.client?.avatarUrl ? (
-                    <img src={job.client.avatarUrl} alt="Client" className="w-full h-full object-cover rounded-2xl" />
-                  ) : (
-                    getInitials(job.client?.name || 'C')
+                <div className="avatar w-12 h-12 text-sm font-bold bg-primary-100 text-primary-700 rounded-2xl ring-2 ring-white shadow-xs relative overflow-hidden flex items-center justify-center">
+                  <span>{getInitials(job.client?.name || 'C')}</span>
+                  {job.client?.avatarUrl && (
+                    <img
+                      src={getMediaUrl(job.client.avatarUrl)}
+                      alt="Client"
+                      onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
+                      className="w-full h-full object-cover rounded-2xl absolute inset-0"
+                    />
                   )}
                 </div>
                 <div>
@@ -476,15 +480,15 @@ export default function JobDetailPage() {
                   {/* Freelancer Header */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
                     <div className="flex items-center gap-3.5">
-                      <div className="avatar w-12 h-12 text-sm font-bold bg-primary-100 text-primary-700 rounded-2xl ring-2 ring-white shadow-xs">
-                        {proposal.freelancer?.avatarUrl ? (
+                      <div className="avatar w-12 h-12 text-sm font-bold bg-primary-100 text-primary-700 rounded-2xl ring-2 ring-white shadow-xs relative overflow-hidden flex items-center justify-center">
+                        <span>{getInitials(proposal.freelancer?.displayName || proposal.freelancer?.name || 'F')}</span>
+                        {proposal.freelancer?.avatarUrl && (
                           <img
-                            src={proposal.freelancer.avatarUrl}
+                            src={getMediaUrl(proposal.freelancer.avatarUrl)}
                             alt="Freelancer"
-                            className="w-full h-full object-cover rounded-2xl"
+                            onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
+                            className="w-full h-full object-cover rounded-2xl absolute inset-0"
                           />
-                        ) : (
-                          getInitials(proposal.freelancer?.displayName || proposal.freelancer?.name || 'F')
                         )}
                       </div>
 

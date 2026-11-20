@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link, useSearchParams } from 'react-router-dom';
 import { listingsApi, metadataApi, favoritesApi } from '@/api';
-import { formatPrice, getInitials } from '@/utils';
+import { formatPrice, getInitials, getMediaUrl } from '@/utils';
 import { useAuthStore, useUIStore } from '@/store';
 import {
   Search,
@@ -455,17 +455,15 @@ export default function ServicesPage() {
                       {/* Seller Profile Summary with Verified Checkmark */}
                       <div className="flex items-center justify-between gap-1.5 mb-2.5">
                         <div className="flex items-center gap-1.5 min-w-0">
-                          <div className="w-6 h-6 rounded-full overflow-hidden bg-slate-100 ring-1 ring-slate-200 shrink-0">
-                            {seller?.avatarUrl ? (
+                          <div className="w-6 h-6 rounded-full overflow-hidden bg-indigo-50 text-indigo-700 flex items-center justify-center text-[10px] font-bold ring-1 ring-slate-200 shrink-0 relative">
+                            <span>{getInitials(seller?.displayName || seller?.name || 'Seller')}</span>
+                            {seller?.avatarUrl && (
                               <img
-                                src={seller.avatarUrl}
+                                src={getMediaUrl(seller.avatarUrl)}
                                 alt={seller.displayName || seller.name}
-                                className="w-full h-full object-cover"
+                                onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
+                                className="w-full h-full object-cover absolute inset-0"
                               />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center text-[10px] font-bold text-indigo-700 bg-indigo-50">
-                                {getInitials(seller?.displayName || seller?.name || 'Seller')}
-                              </div>
                             )}
                           </div>
                           <span className="text-xs font-semibold text-slate-700 truncate">
@@ -558,17 +556,15 @@ export default function ServicesPage() {
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-1.5">
-                          <div className="w-6 h-6 rounded-full overflow-hidden bg-slate-100 ring-1 ring-slate-200 shrink-0">
-                            {seller?.avatarUrl ? (
+                          <div className="w-6 h-6 rounded-full overflow-hidden bg-indigo-50 text-indigo-700 flex items-center justify-center text-[10px] font-bold ring-1 ring-slate-200 shrink-0 relative">
+                            <span>{getInitials(seller?.displayName || seller?.name || 'Seller')}</span>
+                            {seller?.avatarUrl && (
                               <img
-                                src={seller.avatarUrl}
+                                src={getMediaUrl(seller.avatarUrl)}
                                 alt={seller.displayName || seller.name}
-                                className="w-full h-full object-cover"
+                                onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
+                                className="w-full h-full object-cover absolute inset-0"
                               />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center text-[10px] font-bold text-indigo-700 bg-indigo-50">
-                                {getInitials(seller?.displayName || seller?.name || 'Seller')}
-                              </div>
                             )}
                           </div>
                           <span className="text-xs font-semibold text-slate-700">

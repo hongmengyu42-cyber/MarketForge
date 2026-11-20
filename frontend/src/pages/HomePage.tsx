@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { listingsApi } from '@/api';
-import { formatPrice, getInitials } from '@/utils';
+import { formatPrice, getInitials, getMediaUrl } from '@/utils';
 import { useUIStore } from '@/store';
 import {
   Star,
@@ -371,13 +371,15 @@ export default function HomePage() {
                     <div className="p-4 flex-1 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded-full overflow-hidden bg-indigo-100 shrink-0">
-                            {seller?.avatarUrl ? (
-                              <img src={seller.avatarUrl} alt={seller.displayName || seller.name} className="w-full h-full object-cover" />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center text-[9px] font-bold text-indigo-700">
-                                {getInitials(seller?.displayName || seller?.name || 'S')}
-                              </div>
+                          <div className="w-5 h-5 rounded-full overflow-hidden bg-indigo-50 text-indigo-700 flex items-center justify-center text-[9px] font-bold shrink-0 relative">
+                            <span>{getInitials(seller?.displayName || seller?.name || 'S')}</span>
+                            {seller?.avatarUrl && (
+                              <img
+                                src={getMediaUrl(seller.avatarUrl)}
+                                alt={seller.displayName || seller.name}
+                                onError={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }}
+                                className="w-full h-full object-cover absolute inset-0"
+                              />
                             )}
                           </div>
                           <span className="text-xs font-medium text-slate-700 truncate">

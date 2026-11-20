@@ -7,6 +7,7 @@ import com.marketforge.exception.BusinessException;
 import com.marketforge.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +39,9 @@ public class FileUploadController {
     @Value("${storage.upload-dir:./uploads}")
     private String uploadDir;
 
+    @Value("${storage.base-url:}")
+    private String configuredBaseUrl;
+
     private static final long MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
     private static final List<String> ALLOWED_EXTENSIONS = Arrays.asList(".jpg", ".jpeg", ".png", ".webp", ".gif");
 
@@ -52,6 +57,7 @@ public class FileUploadController {
      */
     @PostMapping(value = "/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<Map<String, Object>>> uploadAvatar(
+            HttpServletRequest request,
             @RequestParam("file") MultipartFile file,
             @AuthenticationPrincipal User currentUser) {
 
@@ -74,12 +80,13 @@ public class FileUploadController {
             Files.copy(file.getInputStream(), targetFile, StandardCopyOption.REPLACE_EXISTING);
 
             String relativeUrl = "/uploads/avatars/" + uniqueFilename;
-            UserResponse updatedUser = authService.updateAvatar(currentUser, relativeUrl);
+            String mediaUrl = resolveMediaUrl(request, relativeUrl);
+            UserResponse updatedUser = authService.updateAvatar(currentUser, mediaUrl);
 
-            log.info("Avatar uploaded successfully for user {}: {}", currentUser.getId(), relativeUrl);
+            log.info("Avatar uploaded successfully for user {}: {}", currentUser.getId(), mediaUrl);
 
             return ResponseEntity.ok(ApiResponse.success("Avatar uploaded successfully", Map.of(
-                    "url", relativeUrl,
+                    "url", mediaUrl,
                     "user", updatedUser
             )));
         } catch (IOException e) {
@@ -93,6 +100,7 @@ public class FileUploadController {
      */
     @PostMapping(value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<Map<String, String>>> uploadGeneralImage(
+            HttpServletRequest request,
             @RequestParam("file") MultipartFile file) {
 
         validateImage(file);
@@ -113,13 +121,37 @@ public class FileUploadController {
             Files.copy(file.getInputStream(), targetFile, StandardCopyOption.REPLACE_EXISTING);
 
             String relativeUrl = "/uploads/images/" + uniqueFilename;
+            String mediaUrl = resolveMediaUrl(request, relativeUrl);
             return ResponseEntity.ok(ApiResponse.success("Image uploaded successfully", Map.of(
-                    "url", relativeUrl
+                    "url", mediaUrl
             )));
         } catch (IOException e) {
             log.error("Failed to store uploaded image", e);
             throw new BusinessException("UPLOAD_FAILED", "Failed to store uploaded file: " + e.getMessage());
         }
+    }
+
+    private String resolveMediaUrl(HttpServletRequest request, String relativeUrl) {
+        if (StringUtils.hasText(configuredBaseUrl) && !configuredBaseUrl.contains("localhost")) {
+            return configuredBaseUrl.replaceAll("/+$", "") + relativeUrl;
+        }
+        try {
+            String forwardedProto = request != null ? request.getHeader("X-Forwarded-Proto") : null;
+            String forwardedHost = request != null ? request.getHeader("X-Forwarded-Host") : null;
+            if (StringUtils.hasText(forwardedHost)) {
+                String scheme = StringUtils.hasText(forwardedProto) ? forwardedProto : request.getScheme();
+                return scheme + "://" + forwardedHost + relativeUrl;
+            }
+            if (request != null) {
+                return ServletUriComponentsBuilder.fromRequestUri(request)
+                        .replacePath(relativeUrl)
+                        .replaceQuery(null)
+                        .toUriString();
+            }
+        } catch (Exception e) {
+            log.warn("Failed to resolve dynamic media URL, falling back to relative path: {}", e.getMessage());
+        }
+        return relativeUrl;
     }
 
     private void validateImage(MultipartFile file) {

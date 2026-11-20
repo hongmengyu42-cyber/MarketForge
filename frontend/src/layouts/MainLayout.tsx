@@ -22,7 +22,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import { getInitials } from '@/utils';
+import { getInitials, getMediaUrl } from '@/utils';
 import type { Notification } from '@/types';
 
 export default function MainLayout() {
@@ -226,6 +226,11 @@ export default function MainLayout() {
   });
   const unreadMessagesCount = unreadMessagesData?.data?.data?.totalUnread || 0;
   const userAvatar = user?.avatarUrl || user?.sellerProfile?.avatarUrl;
+  const [avatarError, setAvatarError] = useState(false);
+
+  useEffect(() => {
+    setAvatarError(false);
+  }, [userAvatar]);
 
   const handleLogout = () => {
     logout();
@@ -485,10 +490,11 @@ export default function MainLayout() {
                   {/* User Profile Menu */}
                   <div className="relative group shrink-0">
                     <button className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100 transition-colors">
-                      {userAvatar ? (
+                      {userAvatar && !avatarError ? (
                         <img
-                          src={userAvatar}
+                          src={getMediaUrl(userAvatar)}
                           alt={user?.name || 'User'}
+                          onError={() => setAvatarError(true)}
                           className="w-8 h-8 rounded-full object-cover ring-2 ring-primary-100 shrink-0"
                         />
                       ) : (
@@ -504,10 +510,11 @@ export default function MainLayout() {
 
                     <div className="absolute right-0 mt-1 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-1.5 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-150 z-50">
                       <div className="px-4 py-2.5 border-b border-gray-100 flex items-center gap-2.5">
-                        {userAvatar ? (
+                        {userAvatar && !avatarError ? (
                           <img
-                            src={userAvatar}
+                            src={getMediaUrl(userAvatar)}
                             alt={user?.name || 'User'}
+                            onError={() => setAvatarError(true)}
                             className="w-9 h-9 rounded-full object-cover ring-1 ring-gray-200 shrink-0"
                           />
                         ) : (
