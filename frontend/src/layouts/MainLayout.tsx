@@ -715,10 +715,12 @@ export default function MainLayout() {
               <span className="text-xs text-gray-300">|</span>
               <p className="text-xs text-gray-500">© 2026 MarketForge. All rights reserved.</p>
             </div>
-            <div className="flex items-center gap-6">
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Terms</a>
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Privacy</a>
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Help</a>
+            <div className="flex flex-wrap items-center gap-6">
+              <Link to="/about" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">About Us</Link>
+              <Link to="/services" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">Services</Link>
+              <Link to="/contact" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">Contact</Link>
+              <a href="#" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">Terms</a>
+              <a href="#" className="text-sm font-medium text-gray-500 hover:text-primary-600 transition-colors">Privacy</a>
             </div>
           </div>
         </div>

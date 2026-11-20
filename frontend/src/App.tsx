@@ -8,6 +8,7 @@ import AuthModal from '@/components/modals/AuthModal';
 const HomePage = lazy(() => import('@/pages/HomePage'));
 const ServicesPage = lazy(() => import('@/pages/ServicesPage'));
 const ContactPage = lazy(() => import('@/pages/ContactPage'));
+const AboutPage = lazy(() => import('@/pages/AboutPage'));
 const ListingDetailPage = lazy(() => import('@/pages/ListingDetailPage'));
 const OrdersPage = lazy(() => import('@/pages/OrdersPage'));
 const OrderWorkspacePage = lazy(() => import('@/pages/OrderWorkspacePage'));
@@ -56,6 +57,7 @@ export default function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/explore" element={<ServicesPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/jobs" element={<JobBoardPage />} />
             <Route path="/jobs/new" element={
               <ProtectedRoute><PostJobPage /></ProtectedRoute>
