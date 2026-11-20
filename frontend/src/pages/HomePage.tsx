@@ -33,7 +33,7 @@ export default function HomePage() {
            Full viewport height (100dvh - navbar) with centered layout,
            guaranteed 2-line headline, clean Get Started CTA, and pure CSS 3D Orb.
       ══════════════════════════════════════════════════════════════ */}
-      <section className="w-full min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex flex-col justify-between bg-white overflow-hidden relative">
+      <section className="w-full min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex flex-col justify-between bg-white dark:bg-slate-950 overflow-hidden relative transition-colors duration-150">
         {/* Subtle full-width background gradient that bleeds edge-to-edge */}
         <div className="relative flex-1 flex items-center w-full">
           {/* Background decorative blobs */}
@@ -59,13 +59,13 @@ export default function HomePage() {
               {/* ── LEFT: Copy Column ── */}
               <div className="space-y-6 max-w-2xl animate-fade-up">
                 {/* Micro badge */}
-                <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-100/80">
+                <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-100/80 dark:border-indigo-800/60">
                   Next-Gen Smart Escrow Freelance Marketplace
                 </div>
 
                 {/* Headline — STRICTLY 2 LINES */}
                 <div className="space-y-1 sm:space-y-2">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[52px] font-black tracking-tight leading-[1.12] text-slate-900 sm:whitespace-nowrap">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[52px] font-black tracking-tight leading-[1.12] text-slate-900 dark:text-white sm:whitespace-nowrap">
                     Hire with Confidence.
                   </h1>
                   <h1
@@ -82,7 +82,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Subheadline */}
-                <p className="text-slate-500 text-base sm:text-lg leading-[1.7] max-w-[520px]">
+                <p className="text-slate-500 dark:text-slate-400 text-base sm:text-lg leading-[1.7] max-w-[520px]">
                   MarketForge auto-locks payments in smart escrow, releasing funds only when milestones are verified — so both sides win, every time.
                 </p>
 
@@ -104,7 +104,7 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={() => setIsDemoOpen(true)}
-                    className="font-semibold text-sm text-slate-700 bg-slate-100/90 hover:bg-slate-200/80 px-6 py-3.5 rounded-xl transition-all duration-200 cursor-pointer border border-slate-200/70"
+                    className="font-semibold text-sm text-slate-700 dark:text-slate-200 bg-slate-100/90 dark:bg-slate-800/90 hover:bg-slate-200/80 dark:hover:bg-slate-700/80 px-6 py-3.5 rounded-xl transition-all duration-200 cursor-pointer border border-slate-200/70 dark:border-slate-700/80"
                   >
                     How Escrow Works
                   </button>
@@ -115,9 +115,9 @@ export default function HomePage() {
                   {[
                     { icon: <ShieldCheck size={16} className="text-emerald-500" />, label: '100% Escrow Protected' },
                     { icon: <Star size={15} className="text-amber-400 fill-amber-400" />, label: '4.9/5 avg rating' },
-                    { icon: <Check size={15} className="text-indigo-600 font-bold" />, label: '2,800+ verified sellers' },
+                    { icon: <Check size={15} className="text-indigo-600 dark:text-indigo-400 font-bold" />, label: '2,800+ verified sellers' },
                   ].map((t) => (
-                    <div key={t.label} className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 font-medium">
+                    <div key={t.label} className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
                       {t.icon}
                       <span>{t.label}</span>
                     </div>
@@ -311,21 +311,21 @@ export default function HomePage() {
       </section>
 
       {/* ──── Section 2: Featured Marketplace Services ──── */}
-      <section id="featured-services" className="bg-slate-50/70 py-16 lg:py-20 border-b border-slate-200/80">
+      <section id="featured-services" className="bg-slate-50/70 dark:bg-slate-900/60 py-16 lg:py-20 border-b border-slate-200/80 dark:border-slate-800 transition-colors duration-150">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">Top-Rated Talent</span>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Top-Rated Talent</span>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
                 Featured Verified Services
               </h2>
-              <p className="text-slate-500 text-sm mt-1">
+              <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
                 Pre-screened engineering, mobile, and design specialists ready to deliver.
               </p>
             </div>
             <Link
               to="/services"
-              className="btn btn-secondary text-xs font-bold self-start sm:self-auto hover:text-indigo-600 transition-colors"
+              className="btn btn-secondary text-xs font-bold self-start sm:self-auto hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
               Browse All Services
             </Link>
@@ -336,10 +336,10 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="card overflow-hidden animate-pulse">
-                  <div className="h-44 bg-slate-200" />
+                  <div className="h-44 bg-slate-200 dark:bg-slate-800" />
                   <div className="p-4 space-y-3">
-                    <div className="h-4 bg-slate-200 rounded w-3/4" />
-                    <div className="h-3 bg-slate-100 rounded w-1/2" />
+                    <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-3/4" />
+                    <div className="h-3 bg-slate-100 dark:bg-slate-800/60 rounded w-1/2" />
                   </div>
                 </div>
               ))}
@@ -356,9 +356,9 @@ export default function HomePage() {
                   <Link
                     key={listing.id}
                     to={`/listings/${listing.slug}`}
-                    className="group card overflow-hidden flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border-slate-200/80 bg-white"
+                    className="group card overflow-hidden flex flex-col transition-all duration-200 hover:-translate-y-1 hover:shadow-lg border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900"
                   >
-                    <div className="relative aspect-video bg-slate-100 overflow-hidden">
+                    <div className="relative aspect-video bg-slate-100 dark:bg-slate-800 overflow-hidden">
                       <img
                         src={primaryImage}
                         alt={listing.title}
@@ -374,7 +374,7 @@ export default function HomePage() {
                     <div className="p-4 flex-1 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <div className="w-5 h-5 rounded-full overflow-hidden bg-indigo-50 text-indigo-700 flex items-center justify-center text-[9px] font-bold shrink-0 relative">
+                          <div className="w-5 h-5 rounded-full overflow-hidden bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 flex items-center justify-center text-[9px] font-bold shrink-0 relative">
                             <span>{getInitials(seller?.displayName || seller?.name || 'S')}</span>
                             {seller?.avatarUrl && (
                               <img
@@ -385,24 +385,24 @@ export default function HomePage() {
                               />
                             )}
                           </div>
-                          <span className="text-xs font-medium text-slate-700 truncate">
+                          <span className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">
                             {seller?.displayName || seller?.name || 'Verified Freelancer'}
                           </span>
                         </div>
 
-                        <h4 className="font-semibold text-xs text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug">
+                        <h4 className="font-semibold text-xs text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug">
                           {listing.title}
                         </h4>
                       </div>
 
-                      <div className="border-t border-slate-100 mt-4 pt-2.5 flex items-center justify-between">
-                        <div className="flex items-center gap-1 text-xs font-semibold text-slate-800">
+                      <div className="border-t border-slate-100 dark:border-slate-800 mt-4 pt-2.5 flex items-center justify-between">
+                        <div className="flex items-center gap-1 text-xs font-semibold text-slate-800 dark:text-slate-200">
                           <Star size={12} className="text-amber-400 fill-amber-400" />
                           <span>{listing.averageRating?.toFixed(1) || '5.0'}</span>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] text-slate-400 uppercase tracking-wider block">From</span>
-                          <span className="text-sm font-bold text-slate-900">{formatPrice(listing.priceAmount)}</span>
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider block">From</span>
+                          <span className="text-sm font-bold text-slate-900 dark:text-white">{formatPrice(listing.priceAmount)}</span>
                         </div>
                       </div>
                     </div>
@@ -415,45 +415,45 @@ export default function HomePage() {
       </section>
 
       {/* ──── Section 3: How Smart Escrow Works ──── */}
-      <section className="bg-white py-16 lg:py-24 border-b border-slate-200/80">
+      <section className="bg-white dark:bg-slate-950 py-16 lg:py-24 border-b border-slate-200/80 dark:border-slate-800 transition-colors duration-150">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">Built for Zero Risk</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mt-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Built for Zero Risk</span>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mt-1">
               How MarketForge Protects Both Sides
             </h2>
-            <p className="text-slate-500 text-sm sm:text-base mt-2">
+            <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base mt-2">
               Our automated milestone escrow ensures clients never pay for incomplete work, and freelancers always get paid upon completion.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-slate-50/80 p-8 rounded-3xl border border-slate-200/70 relative">
+            <div className="bg-slate-50/80 dark:bg-slate-900/80 p-8 rounded-3xl border border-slate-200/70 dark:border-slate-800 relative">
               <div className="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-black text-lg mb-6 shadow-md shadow-indigo-500/25">
                 1
               </div>
-              <h3 className="font-bold text-slate-900 text-lg mb-2">Funds Locked in Neutral Escrow</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">
+              <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-2">Funds Locked in Neutral Escrow</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
                 When an order starts, client payment is safely locked into the MarketForge financial ledger. Neither party can touch it until agreed milestones are delivered.
               </p>
             </div>
 
-            <div className="bg-slate-50/80 p-8 rounded-3xl border border-slate-200/70 relative">
+            <div className="bg-slate-50/80 dark:bg-slate-900/80 p-8 rounded-3xl border border-slate-200/70 dark:border-slate-800 relative">
               <div className="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center font-black text-lg mb-6 shadow-md shadow-purple-500/25">
                 2
               </div>
-              <h3 className="font-bold text-slate-900 text-lg mb-2">Encrypted Vault Deliverables</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">
+              <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-2">Encrypted Vault Deliverables</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
                 Freelancers upload code, designs, or assets to the secure Deliverables Vault. Clients inspect work with built-in revision checkpoints.
               </p>
             </div>
 
-            <div className="bg-slate-50/80 p-8 rounded-3xl border border-slate-200/70 relative">
+            <div className="bg-slate-50/80 dark:bg-slate-900/80 p-8 rounded-3xl border border-slate-200/70 dark:border-slate-800 relative">
               <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-black text-lg mb-6 shadow-md shadow-emerald-500/25">
                 3
               </div>
-              <h3 className="font-bold text-slate-900 text-lg mb-2">Instant Payout & IP Transfer</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">
+              <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-2">Instant Payout & IP Transfer</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
                 Upon milestone approval (or 3-day review timer), payment is released instantly to the seller's wallet, along with a cryptographically verifiable IP transfer certificate.
               </p>
             </div>

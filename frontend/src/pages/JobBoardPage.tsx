@@ -93,16 +93,16 @@ export default function JobBoardPage() {
       </div>
 
       {/* ──── SEARCH & FILTERS BAR ──── */}
-      <div className="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm space-y-4">
         {/* Search Bar */}
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500" size={18} />
           <input
             type="text"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             placeholder="Search by role, required tech stack, or keyword (e.g. React, Spring Boot, Figma, Flutter)..."
-            className="w-full pl-11 pr-4 py-3 rounded-2xl bg-gray-50 border border-gray-200 text-sm focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
+            className="w-full pl-11 pr-4 py-3 rounded-2xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-sm text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-all"
           />
         </div>
 
@@ -113,7 +113,7 @@ export default function JobBoardPage() {
             <select
               value={selectedCategory || ''}
               onChange={(e) => setSelectedCategory(e.target.value ? Number(e.target.value) : undefined)}
-              className="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 bg-gray-50 hover:bg-white transition-colors focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300 bg-gray-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 transition-colors focus:ring-2 focus:ring-primary-500"
             >
               <option value="">All Categories</option>
               {categories.map((c) => (
@@ -124,15 +124,15 @@ export default function JobBoardPage() {
             </select>
 
             {/* Budget Type */}
-            <div className="inline-flex rounded-xl bg-gray-100 p-1 text-xs font-semibold">
+            <div className="inline-flex rounded-xl bg-gray-100 dark:bg-slate-800 p-1 text-xs font-semibold">
               {['ALL', 'FIXED_PRICE', 'HOURLY'].map((type) => (
                 <button
                   key={type}
                   onClick={() => setBudgetType(type)}
                   className={`px-3 py-1 rounded-lg transition-all ${
                     budgetType === type
-                      ? 'bg-white text-gray-900 shadow-xs font-bold'
-                      : 'text-gray-500 hover:text-gray-800'
+                      ? 'bg-white dark:bg-slate-700 text-gray-900 dark:text-white shadow-xs font-bold'
+                      : 'text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200'
                   }`}
                 >
                   {type === 'ALL' ? 'All Budgets' : type === 'FIXED_PRICE' ? 'Fixed Price' : 'Hourly'}
@@ -144,7 +144,7 @@ export default function JobBoardPage() {
             <select
               value={experienceLevel}
               onChange={(e) => setExperienceLevel(e.target.value)}
-              className="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 bg-gray-50 hover:bg-white transition-colors focus:ring-2 focus:ring-primary-500"
+              className="px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-700 text-xs font-semibold text-gray-700 dark:text-slate-300 bg-gray-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 transition-colors focus:ring-2 focus:ring-primary-500"
             >
               <option value="ALL">All Experience Levels</option>
               <option value="ENTRY">Entry Level</option>
@@ -153,8 +153,8 @@ export default function JobBoardPage() {
             </select>
           </div>
 
-          <div className="text-xs text-gray-500 font-medium">
-            Showing <span className="font-bold text-gray-900">{jobs.length}</span> open jobs
+          <div className="text-xs text-gray-500 dark:text-slate-400 font-medium">
+            Showing <span className="font-bold text-gray-900 dark:text-white">{jobs.length}</span> open jobs
           </div>
         </div>
       </div>
@@ -163,16 +163,16 @@ export default function JobBoardPage() {
       {isLoading ? (
         <div className="space-y-4 animate-pulse">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-44 bg-gray-200 rounded-3xl" />
+            <div key={i} className="h-44 bg-gray-200 dark:bg-slate-800 rounded-3xl" />
           ))}
         </div>
       ) : jobs.length === 0 ? (
         <div className="card p-16 text-center space-y-4">
-          <div className="w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl mx-auto flex items-center justify-center">
+          <div className="w-16 h-16 bg-primary-100 dark:bg-primary-950/60 text-primary-600 dark:text-primary-400 rounded-2xl mx-auto flex items-center justify-center">
             <Briefcase size={32} />
           </div>
-          <h3 className="text-lg font-bold text-gray-900">No jobs match your search criteria</h3>
-          <p className="text-sm text-gray-500 max-w-sm mx-auto">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white">No jobs match your search criteria</h3>
+          <p className="text-sm text-gray-500 dark:text-slate-400 max-w-sm mx-auto">
             Try adjusting your search terms, changing category filters, or be the first client to post a job!
           </p>
           <button
@@ -188,19 +188,19 @@ export default function JobBoardPage() {
             <Link
               key={job.id}
               to={`/jobs/${job.slug}`}
-              className="block bg-white border border-gray-200 hover:border-primary-400 hover:shadow-md rounded-3xl p-6 transition-all group relative overflow-hidden"
+              className="block bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-500/50 hover:shadow-md rounded-3xl p-6 transition-all group relative overflow-hidden"
             >
               <div className="space-y-3">
                 {/* Header row */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                    <span className="text-[11px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider">
                       Posted {formatDate(job.createdAt)}
                     </span>
                     {job.category && (
                       <>
-                        <span className="text-gray-300">•</span>
-                        <span className="text-xs font-semibold text-primary-600 bg-primary-50 px-2.5 py-0.5 rounded-full">
+                        <span className="text-gray-300 dark:text-slate-700">•</span>
+                        <span className="text-xs font-semibold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/60 px-2.5 py-0.5 rounded-full">
                           {job.category.name}
                         </span>
                       </>
@@ -208,26 +208,26 @@ export default function JobBoardPage() {
                   </div>
 
                   {/* Budget pill */}
-                  <div className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50 px-3 py-1 rounded-xl w-fit font-bold text-sm border border-emerald-100">
+                  <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded-xl w-fit font-bold text-sm border border-emerald-100 dark:border-emerald-800/40">
                     <DollarSign size={15} />
                     <span>
                       {job.budgetType === 'HOURLY'
                         ? `${formatPrice(job.budgetAmount)}/hr`
                         : formatPrice(job.budgetAmount)}
                     </span>
-                    <span className="text-xs text-emerald-600 font-normal">
+                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-normal">
                       ({job.budgetType === 'HOURLY' ? 'Hourly' : 'Fixed Price'})
                     </span>
                   </div>
                 </div>
 
                 {/* Job Title */}
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                   {job.title}
                 </h3>
 
                 {/* Description snippet */}
-                <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                   {job.description}
                 </p>
 
@@ -237,7 +237,7 @@ export default function JobBoardPage() {
                     {job.skills.map((skill, idx) => (
                       <span
                         key={idx}
-                        className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2.5 py-1 rounded-lg font-medium transition-colors"
+                        className="text-xs bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 px-2.5 py-1 rounded-lg font-medium transition-colors"
                       >
                         {skill}
                       </span>
@@ -246,31 +246,31 @@ export default function JobBoardPage() {
                 )}
 
                 {/* Meta details footer */}
-                <div className="pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4 text-xs text-gray-500">
+                <div className="pt-3 border-t border-gray-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs text-gray-500 dark:text-slate-400">
                   <div className="flex flex-wrap items-center gap-4">
                     <span className="flex items-center gap-1.5">
-                      <Clock size={13} className="text-gray-400" />
+                      <Clock size={13} className="text-gray-400 dark:text-slate-500" />
                       <span>{job.duration || '1 to 3 months'}</span>
                     </span>
 
                     <span className="flex items-center gap-1.5">
-                      <Layers size={13} className="text-gray-400" />
+                      <Layers size={13} className="text-gray-400 dark:text-slate-500" />
                       <span className="capitalize">{job.experienceLevel?.toLowerCase()} Level</span>
                     </span>
 
-                    <span className="flex items-center gap-1.5 text-primary-600 font-medium">
+                    <span className="flex items-center gap-1.5 text-primary-600 dark:text-primary-400 font-medium">
                       <FileText size={13} />
                       <span>{job.proposalsCount} Proposals</span>
                     </span>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1 text-gray-700 font-medium">
+                    <div className="flex items-center gap-1 text-gray-700 dark:text-slate-300 font-medium">
                       <ShieldCheck size={14} className="text-emerald-500" />
                       <span>Verified Client: {job.client?.name}</span>
                     </div>
 
-                    <span className="text-primary-600 font-bold group-hover:translate-x-0.5 transition-transform flex items-center">
+                    <span className="text-primary-600 dark:text-primary-400 font-bold group-hover:translate-x-0.5 transition-transform flex items-center">
                       View Job <ChevronRight size={14} />
                     </span>
                   </div>

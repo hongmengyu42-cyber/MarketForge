@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light dark;
+}
+
+:root.dark,
+html.dark {
+  color-scheme: dark;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -12,7 +21,7 @@
   }
 
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-slate-100 antialiased transition-colors duration-150;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
@@ -29,13 +38,13 @@
     @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
   }
   .btn-secondary {
-    @apply btn bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-primary-500;
+    @apply btn bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 dark:hover:bg-slate-700 focus:ring-primary-500;
   }
   .btn-danger {
     @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
   }
   .btn-ghost {
-    @apply btn bg-transparent text-gray-600 hover:bg-gray-100 focus:ring-primary-500;
+    @apply btn bg-transparent text-gray-600 hover:bg-gray-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200 focus:ring-primary-500;
   }
   .btn-sm {
     @apply px-3 py-1.5 text-xs;
@@ -45,51 +54,51 @@
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-card border border-gray-100;
+    @apply bg-white rounded-xl shadow-card border border-gray-100 dark:bg-slate-900 dark:border-slate-800 dark:shadow-none;
   }
   .card-hover {
-    @apply card transition-shadow duration-200 hover:shadow-card-hover cursor-pointer;
+    @apply card transition-all duration-200 hover:shadow-card-hover dark:hover:border-slate-700 cursor-pointer;
   }
 
   .input {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors placeholder-gray-400 bg-white;
+    @apply w-full px-3 py-2 border border-gray-300 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors placeholder-gray-400 dark:placeholder-slate-500 bg-white dark:bg-slate-900 dark:text-slate-100;
   }
   .input-error {
     @apply border-red-500 focus:ring-red-500;
   }
 
   .label {
-    @apply block text-sm font-medium text-gray-700 mb-1;
+    @apply block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1;
   }
 
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
-  .badge-green  { @apply badge bg-green-100 text-green-800; }
-  .badge-yellow { @apply badge bg-yellow-100 text-yellow-800; }
-  .badge-red    { @apply badge bg-red-100 text-red-800; }
-  .badge-blue   { @apply badge bg-blue-100 text-blue-800; }
-  .badge-gray   { @apply badge bg-gray-100 text-gray-700; }
-  .badge-purple { @apply badge bg-purple-100 text-purple-800; }
+  .badge-green  { @apply badge bg-green-100 text-green-800 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border dark:border-emerald-800/40; }
+  .badge-yellow { @apply badge bg-yellow-100 text-yellow-800 dark:bg-amber-950/60 dark:text-amber-400 dark:border dark:border-amber-800/40; }
+  .badge-red    { @apply badge bg-red-100 text-red-800 dark:bg-rose-950/60 dark:text-rose-400 dark:border dark:border-rose-800/40; }
+  .badge-blue   { @apply badge bg-blue-100 text-blue-800 dark:bg-sky-950/60 dark:text-sky-400 dark:border dark:border-sky-800/40; }
+  .badge-gray   { @apply badge bg-gray-100 text-gray-700 dark:bg-slate-800 dark:text-slate-300 dark:border dark:border-slate-700/50; }
+  .badge-purple { @apply badge bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-400 dark:border dark:border-purple-800/40; }
 
   .modal-overlay {
-    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4;
   }
   .modal-content {
-    @apply bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto;
+    @apply bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-slate-800 text-gray-900 dark:text-slate-100;
   }
   .modal-header {
-    @apply flex items-center justify-between p-6 border-b border-gray-100;
+    @apply flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-800;
   }
   .modal-body {
     @apply p-6;
   }
   .modal-footer {
-    @apply flex items-center justify-end gap-3 p-6 border-t border-gray-100;
+    @apply flex items-center justify-end gap-3 p-6 border-t border-gray-100 dark:border-slate-800;
   }
 
   .drawer {
-    @apply fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-50 flex flex-col;
+    @apply fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-slate-900 shadow-2xl z-50 flex flex-col border-l border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100;
   }
 
   .stat-card {
@@ -100,17 +109,17 @@
     @apply px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150;
   }
   .tab-active {
-    @apply tab-button bg-primary-100 text-primary-700;
+    @apply tab-button bg-primary-100 text-primary-700 dark:bg-primary-950 dark:text-primary-300;
   }
   .tab-inactive {
-    @apply tab-button text-gray-600 hover:bg-gray-100 hover:text-gray-900;
+    @apply tab-button text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200;
   }
 
   .form-group {
     @apply space-y-1;
   }
   .field-error {
-    @apply text-xs text-red-600 mt-1;
+    @apply text-xs text-red-600 dark:text-red-400 mt-1;
   }
 
   .avatar {
@@ -128,19 +137,19 @@
     @apply w-full text-sm text-left;
   }
   thead {
-    @apply bg-gray-50 border-b border-gray-200;
+    @apply bg-gray-50 dark:bg-slate-800/80 border-b border-gray-200 dark:border-slate-800;
   }
   th {
-    @apply px-4 py-3 font-medium text-gray-600 whitespace-nowrap;
+    @apply px-4 py-3 font-medium text-gray-600 dark:text-slate-300 whitespace-nowrap;
   }
   td {
-    @apply px-4 py-3 border-b border-gray-100;
+    @apply px-4 py-3 border-b border-gray-100 dark:border-slate-800/80 dark:text-slate-300;
   }
   tr:last-child td {
     @apply border-b-0;
   }
   tr:hover td {
-    @apply bg-gray-50;
+    @apply bg-gray-50 dark:bg-slate-800/40;
   }
 }
 

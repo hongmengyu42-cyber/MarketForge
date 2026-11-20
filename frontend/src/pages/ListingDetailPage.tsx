@@ -127,12 +127,12 @@ export default function ListingDetailPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-        <Link to="/explore" className="hover:text-primary-600">Explore</Link>
+      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-6">
+        <Link to="/explore" className="hover:text-primary-600 dark:hover:text-primary-400">Explore</Link>
         <span>/</span>
-        <span className="text-gray-700">{listing.category?.name || 'Services'}</span>
+        <span className="text-gray-700 dark:text-slate-300">{listing.category?.name || 'Services'}</span>
         <span>/</span>
-        <span className="text-gray-900 font-medium truncate max-w-xs">{listing.title}</span>
+        <span className="text-gray-900 dark:text-white font-medium truncate max-w-xs">{listing.title}</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -140,16 +140,16 @@ export default function ListingDetailPage() {
         <div className="lg:col-span-2 space-y-8">
           {/* Header */}
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
               {listing.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-slate-400">
               <Link to={`/sellers/${listing.seller?.id}`} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <div className="avatar w-8 h-8 text-xs font-semibold">
                   {getInitials(listing.seller?.displayName || listing.seller?.name || 'S')}
                 </div>
-                <span className="font-semibold text-gray-900 hover:text-primary-600">
+                <span className="font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400">
                   {listing.seller?.displayName || listing.seller?.name}
                 </span>
                 {listing.seller?.isTopRated && (
@@ -161,19 +161,19 @@ export default function ListingDetailPage() {
 
               <div className="flex items-center gap-1">
                 <Star size={16} className="rating-star" />
-                <span className="font-bold text-gray-900">
+                <span className="font-bold text-gray-900 dark:text-white">
                   {listing.averageRating ? listing.averageRating.toFixed(1) : 'New'}
                 </span>
-                <span className="text-gray-400">({listing.reviewCount || 0} reviews)</span>
+                <span className="text-gray-400 dark:text-slate-500">({listing.reviewCount || 0} reviews)</span>
               </div>
 
-              <div className="text-gray-400">•</div>
+              <div className="text-gray-400 dark:text-slate-600">•</div>
               <span>{listing.completedOrdersCount || 0} orders completed</span>
             </div>
           </div>
 
           {/* Image Showcase */}
-          <div className="relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200">
+          <div className="relative rounded-2xl overflow-hidden bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-800">
             {listing.imageUrls && listing.imageUrls.length > 0 ? (
               <img
                 src={listing.imageUrls[0]}
@@ -181,17 +181,17 @@ export default function ListingDetailPage() {
                 className="w-full h-80 sm:h-96 object-cover"
               />
             ) : (
-              <div className="w-full h-80 sm:h-96 flex flex-col items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 text-primary-400">
+              <div className="w-full h-80 sm:h-96 flex flex-col items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 dark:from-slate-800 dark:to-slate-900 text-primary-400">
                 <span className="text-6xl font-bold mb-2">{listing.title[0]}</span>
-                <span className="text-sm font-medium text-primary-600">MarketForge Verified Service</span>
+                <span className="text-sm font-medium text-primary-600 dark:text-primary-400">MarketForge Verified Service</span>
               </div>
             )}
           </div>
 
           {/* Description */}
           <div className="card p-6 space-y-4">
-            <h2 className="text-lg font-bold text-gray-900 border-b pb-3">About This Service</h2>
-            <div className="text-gray-700 leading-relaxed whitespace-pre-line text-sm sm:text-base">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white border-b dark:border-slate-800 pb-3">About This Service</h2>
+            <div className="text-gray-700 dark:text-slate-300 leading-relaxed whitespace-pre-line text-sm sm:text-base">
               {listing.description || 'No detailed description provided by the seller.'}
             </div>
           </div>
@@ -199,7 +199,7 @@ export default function ListingDetailPage() {
           {/* Skills / Tags */}
           {listing.skills && listing.skills.length > 0 && (
             <div className="card p-6 space-y-3">
-              <h2 className="text-lg font-bold text-gray-900">Relevant Skills & Technologies</h2>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white">Relevant Skills & Technologies</h2>
               <div className="flex flex-wrap gap-2">
                 {listing.skills.map((skill, idx) => (
                   <span key={idx} className="badge-blue px-3 py-1 rounded-full text-xs font-medium">
@@ -362,27 +362,27 @@ export default function ListingDetailPage() {
 
         {/* Right Sticky Column: Purchase Box */}
         <div>
-          <div className="sticky top-24 card p-6 space-y-6 shadow-md border-gray-200">
-            <div className="flex items-baseline justify-between border-b pb-4">
-              <span className="text-sm text-gray-500">Service Fee</span>
+          <div className="sticky top-24 card p-6 space-y-6 shadow-md border-gray-200 dark:border-slate-800">
+            <div className="flex items-baseline justify-between border-b dark:border-slate-800 pb-4">
+              <span className="text-sm text-gray-500 dark:text-slate-400">Service Fee</span>
               <div className="text-right">
-                <span className="text-3xl font-extrabold text-gray-900">
+                <span className="text-3xl font-extrabold text-gray-900 dark:text-white">
                   {formatPrice(listing.priceAmount, listing.currency)}
                 </span>
               </div>
             </div>
 
-            <div className="space-y-3 text-sm text-gray-600">
+            <div className="space-y-3 text-sm text-gray-600 dark:text-slate-300">
               <div className="flex items-center gap-2">
-                <Clock size={16} className="text-primary-600" />
-                <span className="font-medium text-gray-900">{listing.deliveryDays} Days Delivery</span>
+                <Clock size={16} className="text-primary-600 dark:text-primary-400" />
+                <span className="font-medium text-gray-900 dark:text-white">{listing.deliveryDays} Days Delivery</span>
               </div>
               <div className="flex items-center gap-2">
-                <RefreshCw size={16} className="text-primary-600" />
+                <RefreshCw size={16} className="text-primary-600 dark:text-primary-400" />
                 <span>{listing.revisionsIncluded} Revisions Included</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle size={16} className="text-green-600" />
+                <CheckCircle size={16} className="text-green-600 dark:text-emerald-400" />
                 <span>Protected by MarketForge Escrow Guarantee</span>
               </div>
             </div>
@@ -391,20 +391,20 @@ export default function ListingDetailPage() {
               <button
                 onClick={handleOrder}
                 disabled={orderMutation.isPending}
-                className="btn-primary w-full py-3.5 text-base font-semibold shadow-lg shadow-primary-500/20"
+                className="btn-primary w-full py-3.5 text-base font-semibold shadow-lg shadow-primary-500/20 cursor-pointer"
               >
                 {orderMutation.isPending ? 'Processing Order...' : 'Order Now'}
               </button>
 
               <button
                 onClick={() => setMessageOpen(true)}
-                className="btn-secondary w-full py-2.5 text-sm"
+                className="btn-secondary w-full py-2.5 text-sm cursor-pointer"
               >
                 Inquire & Custom Request
               </button>
             </div>
 
-            <div className="pt-4 border-t text-xs text-gray-400 space-y-1">
+            <div className="pt-4 border-t dark:border-slate-800 text-xs text-gray-400 dark:text-slate-500 space-y-1">
               <p>• Funds held in secure escrow until you confirm delivery</p>
               <p>• Full refund policy with transparent dispute arbitration</p>
             </div>

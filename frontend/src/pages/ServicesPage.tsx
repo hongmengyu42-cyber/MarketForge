@@ -116,7 +116,7 @@ export default function ServicesPage() {
   return (
     <div className="w-full pb-16">
       {/* ──── Header & Dedicated Search Section ──── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-50/80 via-indigo-50/20 to-white border-b border-slate-200/80 py-10 lg:py-14">
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-50/80 via-indigo-50/20 to-white dark:from-slate-900/90 dark:via-slate-900 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 py-10 lg:py-14">
         {/* Soft atmospheric background glow */}
         <div 
           className="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[350px] pointer-events-none opacity-40 blur-3xl rounded-full"
@@ -125,14 +125,14 @@ export default function ServicesPage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white text-indigo-700 border border-indigo-100 shadow-2xs mb-3.5 backdrop-blur-xs">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-400 border border-indigo-100 dark:border-slate-800 shadow-2xs mb-3.5 backdrop-blur-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Verified Freelance Marketplace
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               Explore Professional Services
             </h1>
-            <p className="mt-2 text-slate-500 text-sm sm:text-base leading-relaxed max-w-2xl">
+            <p className="mt-2 text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl">
               Find and hire verified engineers, designers, and specialists with 100% smart milestone escrow protection.
             </p>
           </div>
@@ -140,7 +140,7 @@ export default function ServicesPage() {
           {/* Search Box */}
           <div className="mt-7 max-w-2xl">
             <div
-              className="relative rounded-2xl bg-white transition-all duration-200"
+              className="relative rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 transition-all duration-200"
               style={{ boxShadow: '0 8px 30px rgba(99,102,241,0.08), 0 1px 3px rgba(0,0,0,0.04)' }}
             >
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
@@ -148,13 +148,13 @@ export default function ServicesPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search services, skills, or sellers (e.g. React, UI/UX, Python)..."
-                className="w-full pl-11 pr-28 py-3.5 rounded-2xl text-slate-800 bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 placeholder-slate-400 transition-all"
+                className="w-full pl-11 pr-28 py-3.5 rounded-2xl text-slate-800 dark:text-slate-100 bg-transparent border-0 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 placeholder-slate-400 dark:placeholder-slate-500 transition-all"
               />
               {search && (
                 <button
                   type="button"
                   onClick={() => setSearch('')}
-                  className="absolute right-24 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600 px-1 cursor-pointer font-medium"
+                  className="absolute right-24 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 px-1 cursor-pointer font-medium"
                 >
                   Clear
                 </button>
@@ -176,7 +176,7 @@ export default function ServicesPage() {
                   key={tag}
                   type="button"
                   onClick={() => setSearch(tag)}
-                  className="text-xs font-medium px-3 py-1 rounded-full bg-white/90 text-slate-600 border border-slate-200/90 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50/40 shadow-2xs transition-all cursor-pointer"
+                  className="text-xs font-medium px-3 py-1 rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 border border-slate-200/90 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-indigo-50/40 dark:hover:bg-indigo-950/40 shadow-2xs transition-all cursor-pointer"
                 >
                   {tag}
                 </button>
@@ -187,7 +187,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ──── Sticky Categories Bar ──── */}
-      <section id="services-catalog" className="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-16 z-30 shadow-2xs">
+      <section id="services-catalog" className="bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 sticky top-16 z-30 shadow-2xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="relative flex items-center">
             {/* Scrollable Track */}
@@ -196,8 +196,8 @@ export default function ServicesPage() {
                 onClick={() => setSelectedCategory('')}
                 className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   selectedCategory === ''
-                    ? 'bg-slate-900 text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                    ? 'bg-slate-900 text-white dark:bg-indigo-600 dark:text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
                 All Categories
@@ -208,8 +208,8 @@ export default function ServicesPage() {
                   onClick={() => setSelectedCategory(cat.slug)}
                   className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
                     selectedCategory === cat.slug
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                      ? 'bg-slate-900 text-white dark:bg-indigo-600 dark:text-white shadow-xs'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
                   {cat.name}
@@ -218,7 +218,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Subtle right fade gradient mask so it doesn't clip harshly */}
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-14 bg-gradient-to-l from-white via-white/80 to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-14 bg-gradient-to-l from-white via-white/80 to-transparent dark:from-slate-950 dark:via-slate-950/80" />
           </div>
         </div>
       </section>
@@ -244,26 +244,26 @@ export default function ServicesPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="text-xs text-gray-500 hover:text-gray-900 flex items-center gap-1 cursor-pointer transition-colors"
+                className="text-xs text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white flex items-center gap-1 cursor-pointer transition-colors"
               >
                 <RotateCcw size={12} />
                 <span>Reset</span>
               </button>
             )}
 
-            <span className="text-xs text-gray-400 border-l border-gray-200 pl-3">
-              Showing <span className="font-semibold text-gray-700">{listings.length}</span> services
+            <span className="text-xs text-gray-400 dark:text-slate-500 border-l border-gray-200 dark:border-slate-800 pl-3">
+              Showing <span className="font-semibold text-gray-700 dark:text-slate-300">{listings.length}</span> services
             </span>
           </div>
 
           <div className="flex items-center gap-3">
             {/* Sort Dropdown */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500 font-medium">Sort:</span>
+              <span className="text-xs text-gray-500 dark:text-slate-400 font-medium">Sort:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="text-xs bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-500"
+                className="text-xs bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-500"
               >
                 <option value="created_at">Newest Arrivals</option>
                 <option value="rating">Highest Rated</option>
@@ -273,11 +273,11 @@ export default function ServicesPage() {
             </div>
 
             {/* View Mode Switcher */}
-            <div className="flex items-center bg-gray-100 p-0.5 rounded-lg border border-gray-200">
+            <div className="flex items-center bg-gray-100 dark:bg-slate-900 p-0.5 rounded-lg border border-gray-200 dark:border-slate-800">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-1.5 rounded-md transition-colors cursor-pointer ${
-                  viewMode === 'grid' ? 'bg-white text-primary-600 shadow-xs' : 'text-gray-500 hover:text-gray-900'
+                  viewMode === 'grid' ? 'bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 shadow-xs' : 'text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
                 }`}
                 title="Grid View"
               >
@@ -286,7 +286,7 @@ export default function ServicesPage() {
               <button
                 onClick={() => setViewMode('list')}
                 className={`p-1.5 rounded-md transition-colors cursor-pointer ${
-                  viewMode === 'list' ? 'bg-white text-primary-600 shadow-xs' : 'text-gray-500 hover:text-gray-900'
+                  viewMode === 'list' ? 'bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 shadow-xs' : 'text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
                 }`}
                 title="List View"
               >
@@ -298,11 +298,11 @@ export default function ServicesPage() {
 
         {/* Collapsible Filter Panel */}
         {isFilterOpen && (
-          <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-8 shadow-xs animate-in fade-in duration-150">
+          <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-5 mb-8 shadow-xs animate-in fade-in duration-150">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Price Range */}
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-2">Budget ($)</label>
+                <label className="block text-xs font-bold text-gray-700 dark:text-slate-300 mb-2">Budget ($)</label>
                 <div className="flex items-center gap-2">
                   <input
                     type="number"
@@ -312,7 +312,7 @@ export default function ServicesPage() {
                     className="input py-1.5 text-xs"
                     min="0"
                   />
-                  <span className="text-gray-400 text-xs">to</span>
+                  <span className="text-gray-400 dark:text-slate-500 text-xs">to</span>
                   <input
                     type="number"
                     placeholder="Max"
@@ -326,11 +326,11 @@ export default function ServicesPage() {
 
               {/* Delivery Time */}
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-2">Delivery Time</label>
+                <label className="block text-xs font-bold text-gray-700 dark:text-slate-300 mb-2">Delivery Time</label>
                 <select
                   value={deliveryDays}
                   onChange={(e) => setDeliveryDays(e.target.value ? Number(e.target.value) : '')}
-                  className="input py-1.5 text-xs bg-white"
+                  className="input py-1.5 text-xs bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200"
                 >
                   <option value="">Any Delivery Time</option>
                   <option value="1">Up to 24 hours</option>
@@ -342,11 +342,11 @@ export default function ServicesPage() {
 
               {/* Minimum Rating */}
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-2">Rating</label>
+                <label className="block text-xs font-bold text-gray-700 dark:text-slate-300 mb-2">Rating</label>
                 <select
                   value={minRating}
                   onChange={(e) => setMinRating(e.target.value ? Number(e.target.value) : '')}
-                  className="input py-1.5 text-xs bg-white"
+                  className="input py-1.5 text-xs bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200"
                 >
                   <option value="">Any Rating</option>
                   <option value="4.5">4.5 & up ⭐</option>
@@ -372,30 +372,30 @@ export default function ServicesPage() {
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div key={i} className="card overflow-hidden animate-pulse">
-                <div className="h-48 bg-gray-200" />
+              <div key={i} className="card overflow-hidden animate-pulse dark:bg-slate-900 dark:border-slate-800">
+                <div className="h-48 bg-gray-200 dark:bg-slate-800" />
                 <div className="p-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gray-200" />
-                    <div className="h-3 bg-gray-200 rounded w-1/3" />
+                    <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-slate-800" />
+                    <div className="h-3 bg-gray-200 dark:bg-slate-800 rounded w-1/3" />
                   </div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4" />
-                  <div className="h-3 bg-gray-100 rounded w-1/2" />
-                  <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
-                    <div className="h-3 bg-gray-200 rounded w-1/4" />
-                    <div className="h-4 bg-gray-200 rounded w-1/4" />
+                  <div className="h-4 bg-gray-200 dark:bg-slate-800 rounded w-3/4" />
+                  <div className="h-3 bg-gray-100 dark:bg-slate-800/60 rounded w-1/2" />
+                  <div className="pt-2 border-t border-gray-100 dark:border-slate-800 flex justify-between items-center">
+                    <div className="h-3 bg-gray-200 dark:bg-slate-800 rounded w-1/4" />
+                    <div className="h-4 bg-gray-200 dark:bg-slate-800 rounded w-1/4" />
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : listings.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-2xl border border-gray-200 shadow-xs max-w-xl mx-auto p-8">
-            <div className="w-14 h-14 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center mx-auto mb-4">
+          <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-xs max-w-xl mx-auto p-8">
+            <div className="w-14 h-14 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-400 dark:text-slate-500 flex items-center justify-center mx-auto mb-4">
               <Search size={24} />
             </div>
-            <h3 className="text-lg font-bold text-gray-800">No services found</h3>
-            <p className="text-sm text-gray-500 mt-1 max-w-sm mx-auto">
+            <h3 className="text-lg font-bold text-gray-800 dark:text-slate-100">No services found</h3>
+            <p className="text-sm text-gray-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
               We couldn't find any services matching your criteria. Try adjusting your search keywords or resetting active filters.
             </p>
             <button onClick={clearAllFilters} className="btn-primary btn-sm mt-5 cursor-pointer">
@@ -415,10 +415,10 @@ export default function ServicesPage() {
                 <Link
                   key={listing.id}
                   to={`/listings/${listing.slug}`}
-                  className="group bg-white rounded-2xl border border-slate-200/80 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-500/8"
+                  className="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 dark:hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/8 dark:hover:shadow-indigo-500/10"
                 >
                   {/* Thumbnail Container */}
-                  <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
+                  <div className="relative aspect-[16/10] bg-slate-100 dark:bg-slate-800 overflow-hidden">
                     <img
                       src={primaryImage}
                       alt={listing.title}
@@ -432,7 +432,7 @@ export default function ServicesPage() {
                     {/* Favorite Button */}
                     <button
                       onClick={(e) => handleToggleFavorite(e, listing.id)}
-                      className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-white shadow-xs transition-all cursor-pointer z-10 active:scale-90"
+                      className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-md flex items-center justify-center text-slate-400 dark:text-slate-400 hover:text-red-500 hover:bg-white dark:hover:bg-slate-700 shadow-xs transition-all cursor-pointer z-10 active:scale-90"
                       title={isSaved ? 'Remove from wishlist' : 'Save to wishlist'}
                     >
                       <Heart
@@ -455,7 +455,7 @@ export default function ServicesPage() {
                       {/* Seller Profile Summary with Verified Checkmark */}
                       <div className="flex items-center justify-between gap-1.5 mb-2.5">
                         <div className="flex items-center gap-1.5 min-w-0">
-                          <div className="w-6 h-6 rounded-full overflow-hidden bg-indigo-50 text-indigo-700 flex items-center justify-center text-[10px] font-bold ring-1 ring-slate-200 shrink-0 relative">
+                          <div className="w-6 h-6 rounded-full overflow-hidden bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 flex items-center justify-center text-[10px] font-bold ring-1 ring-slate-200 dark:ring-slate-700 shrink-0 relative">
                             <span>{getInitials(seller?.displayName || seller?.name || 'Seller')}</span>
                             {seller?.avatarUrl && (
                               <img
@@ -466,47 +466,47 @@ export default function ServicesPage() {
                               />
                             )}
                           </div>
-                          <span className="text-xs font-semibold text-slate-700 truncate">
+                          <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 truncate">
                             {seller?.displayName || seller?.name || 'Verified Freelancer'}
                           </span>
-                          <CheckCircle2 size={13} className="text-indigo-600 shrink-0 fill-indigo-50" />
+                          <CheckCircle2 size={13} className="text-indigo-600 dark:text-indigo-400 shrink-0 fill-indigo-50 dark:fill-indigo-950" />
                         </div>
 
                         {/* Escrow Shield indicator */}
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50/90 border border-emerald-100 px-1.5 py-0.5 rounded-md shrink-0">
-                          <ShieldCheck size={11} className="text-emerald-600" />
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50/90 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-800/40 px-1.5 py-0.5 rounded-md shrink-0">
+                          <ShieldCheck size={11} className="text-emerald-600 dark:text-emerald-400" />
                           Escrow
                         </span>
                       </div>
 
                       {/* Title */}
-                      <h4 className="font-bold text-sm text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug mb-2">
+                      <h4 className="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug mb-2">
                         {listing.title}
                       </h4>
                     </div>
 
                     <div>
                       {/* Rating & Delivery Badges */}
-                      <div className="flex items-center justify-between text-xs text-slate-500 mb-3 pt-2">
-                        <div className="flex items-center gap-1 font-bold text-slate-800">
+                      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-3 pt-2">
+                        <div className="flex items-center gap-1 font-bold text-slate-800 dark:text-slate-200">
                           <Star size={13} className="text-amber-400 fill-amber-400" />
                           <span>{listing.averageRating?.toFixed(1) || '5.0'}</span>
-                          <span className="text-slate-400 font-normal">
+                          <span className="text-slate-400 dark:text-slate-500 font-normal">
                             ({listing.reviewCount || 0})
                           </span>
                         </div>
-                        <div className="flex items-center gap-1 text-slate-500 font-medium text-[11px]">
+                        <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400 font-medium text-[11px]">
                           <Clock size={12} className="text-slate-400" />
                           <span>{listing.deliveryDays}d delivery</span>
                         </div>
                       </div>
 
                       {/* Pricing Footer */}
-                      <div className="border-t border-slate-100 pt-3 flex items-center justify-between">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                      <div className="border-t border-slate-100 dark:border-slate-800 pt-3 flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                           Starting at
                         </span>
-                        <span className="text-base font-extrabold text-slate-900">
+                        <span className="text-base font-extrabold text-slate-900 dark:text-white">
                           {formatPrice(listing.priceAmount)}
                         </span>
                       </div>
@@ -529,9 +529,9 @@ export default function ServicesPage() {
                 <Link
                   key={listing.id}
                   to={`/listings/${listing.slug}`}
-                  className="group bg-white rounded-2xl border border-slate-200/80 overflow-hidden flex flex-col sm:flex-row transition-all duration-300 hover:shadow-lg hover:border-indigo-200"
+                  className="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden flex flex-col sm:flex-row transition-all duration-300 hover:shadow-lg hover:border-indigo-200 dark:hover:border-indigo-500/50"
                 >
-                  <div className="sm:w-64 h-48 sm:h-auto relative bg-slate-100 shrink-0 overflow-hidden">
+                  <div className="sm:w-64 h-48 sm:h-auto relative bg-slate-100 dark:bg-slate-800 shrink-0 overflow-hidden">
                     <img
                       src={primaryImage}
                       alt={listing.title}
@@ -539,7 +539,7 @@ export default function ServicesPage() {
                     />
                     <button
                       onClick={(e) => handleToggleFavorite(e, listing.id)}
-                      className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-white shadow-xs transition-all cursor-pointer z-10 active:scale-90"
+                      className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-md flex items-center justify-center text-slate-400 dark:text-slate-400 hover:text-red-500 hover:bg-white dark:hover:bg-slate-700 shadow-xs transition-all cursor-pointer z-10 active:scale-90"
                     >
                       <Heart
                         size={14}
@@ -556,7 +556,7 @@ export default function ServicesPage() {
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-1.5">
-                          <div className="w-6 h-6 rounded-full overflow-hidden bg-indigo-50 text-indigo-700 flex items-center justify-center text-[10px] font-bold ring-1 ring-slate-200 shrink-0 relative">
+                          <div className="w-6 h-6 rounded-full overflow-hidden bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 flex items-center justify-center text-[10px] font-bold ring-1 ring-slate-200 dark:ring-slate-700 shrink-0 relative">
                             <span>{getInitials(seller?.displayName || seller?.name || 'Seller')}</span>
                             {seller?.avatarUrl && (
                               <img
@@ -567,43 +567,43 @@ export default function ServicesPage() {
                               />
                             )}
                           </div>
-                          <span className="text-xs font-semibold text-slate-700">
+                          <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                             {seller?.displayName || seller?.name || 'Verified Freelancer'}
                           </span>
-                          <CheckCircle2 size={13} className="text-indigo-600 shrink-0 fill-indigo-50" />
+                          <CheckCircle2 size={13} className="text-indigo-600 dark:text-indigo-400 shrink-0 fill-indigo-50 dark:fill-indigo-950" />
                         </div>
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-md">
-                          <ShieldCheck size={11} className="text-emerald-600" />
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-800/40 px-2 py-0.5 rounded-md">
+                          <ShieldCheck size={11} className="text-emerald-600 dark:text-emerald-400" />
                           Escrow Protected
                         </span>
                       </div>
-                      <h4 className="font-bold text-base text-slate-900 group-hover:text-indigo-600 transition-colors mb-2">
+                      <h4 className="font-bold text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-2">
                         {listing.title}
                       </h4>
-                      <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
                         {listing.description}
                       </p>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                       <div className="flex items-center gap-4 text-xs">
-                        <div className="flex items-center gap-1 font-bold text-slate-800">
+                        <div className="flex items-center gap-1 font-bold text-slate-800 dark:text-slate-200">
                           <Star size={13} className="text-amber-400 fill-amber-400" />
                           <span>{listing.averageRating?.toFixed(1) || '5.0'}</span>
-                          <span className="text-slate-400 font-normal">
+                          <span className="text-slate-400 dark:text-slate-500 font-normal">
                             ({listing.reviewCount || 0})
                           </span>
                         </div>
-                        <div className="flex items-center gap-1 text-slate-500 font-medium">
+                        <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400 font-medium">
                           <Clock size={12} className="text-slate-400" />
                           <span>{listing.deliveryDays} days delivery</span>
                         </div>
                       </div>
                       <div className="text-right">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block">
                           Starting at
                         </span>
-                        <span className="text-lg font-extrabold text-slate-900">
+                        <span className="text-lg font-extrabold text-slate-900 dark:text-white">
                           {formatPrice(listing.priceAmount)}
                         </span>
                       </div>

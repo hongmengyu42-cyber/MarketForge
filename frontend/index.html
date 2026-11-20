@@ -6,6 +6,23 @@
     <link rel="apple-touch-icon" href="/favicon-192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="MarketForge — Build • Sell • Grow. Professional Freelance Services & Autonomous Escrow Marketplace" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      try {
+        var stored = localStorage.getItem('marketforge-theme') || localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = stored === 'dark' || (!stored && prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        var meta = document.querySelector('meta[name="color-scheme"]');
+        if (meta) {
+          meta.content = stored ? stored : 'light dark';
+        }
+      } catch (e) {}
+    </script>
     <title>MarketForge — Build • Sell • Grow</title>
     <script>
       window.global = window;

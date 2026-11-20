@@ -459,7 +459,7 @@ export default function ProfilePage() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-in fade-in duration-300">
       {/* ──── HERO PROFILE CARD ──── */}
-      <div className="relative rounded-3xl overflow-hidden bg-white border border-gray-100 shadow-xl shadow-gray-200/50">
+      <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 shadow-xl shadow-gray-200/50 dark:shadow-none">
         {/* Dynamic Cover Banner */}
         <div className={`h-48 sm:h-56 bg-gradient-to-r ${activeCoverClass} relative overflow-hidden transition-all duration-500`}>
           {/* Subtle Ambient Radial Glow */}
@@ -485,7 +485,7 @@ export default function ProfilePage() {
             <div className="relative group self-center sm:self-auto">
               <div
                 onClick={() => setIsViewerOpen(true)}
-                className="w-32 h-32 sm:w-40 sm:h-40 rounded-full ring-4 ring-white shadow-2xl overflow-hidden bg-white flex items-center justify-center cursor-pointer relative"
+                className="w-32 h-32 sm:w-40 sm:h-40 rounded-full ring-4 ring-white dark:ring-slate-900 shadow-2xl overflow-hidden bg-white dark:bg-slate-900 flex items-center justify-center cursor-pointer relative"
                 title="Click to view full photo"
               >
                 {currentAvatar && !avatarLoadError ? (
@@ -535,7 +535,7 @@ export default function ProfilePage() {
               <button
                 type="button"
                 onClick={handleShareProfile}
-                className="px-4 py-2 rounded-xl text-xs font-semibold border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 shadow-sm transition-all flex items-center gap-1.5 active:scale-95"
+                className="px-4 py-2 rounded-xl text-xs font-semibold border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200 shadow-sm transition-all flex items-center gap-1.5 active:scale-95"
               >
                 <Share2 size={14} />
                 <span>Share Profile</span>
@@ -584,19 +584,19 @@ export default function ProfilePage() {
           {/* User Name & Badges */}
           <div className="space-y-3 text-center sm:text-left">
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
                 {profileUser?.sellerProfile?.displayName || profileUser?.name}
               </h1>
 
               {/* Verification & Role Pills */}
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-xs">
-                  <CheckCircle2 size={13} className="text-emerald-600" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40 shadow-xs">
+                  <CheckCircle2 size={13} className="text-emerald-600 dark:text-emerald-400" />
                   Verified Identity
                 </span>
 
                 {profileUser?.authProvider === 'GOOGLE' && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 shadow-xs">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800/40 shadow-xs">
                     <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
                       <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z" />
                       <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.07.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.26 21.36 7.33 24 12 24z" />
@@ -607,12 +607,12 @@ export default function ProfilePage() {
                   </span>
                 )}
 
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-xs">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/40 shadow-xs">
                   {isSeller ? 'Top Freelancer' : 'Client & Buyer'}
                 </span>
 
                 {profileUser?.isAdmin && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200 shadow-xs">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-800/40 shadow-xs">
                     Admin
                   </span>
                 )}
@@ -620,22 +620,22 @@ export default function ProfilePage() {
             </div>
 
             {/* Quick Metadata */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-gray-500 pt-1">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-gray-500 dark:text-slate-400 pt-1">
               <span className="flex items-center gap-1.5">
-                <Mail size={14} className="text-gray-400" />
-                <span className="font-medium text-gray-700">{profileUser?.email}</span>
+                <Mail size={14} className="text-gray-400 dark:text-slate-500" />
+                <span className="font-medium text-gray-700 dark:text-slate-300">{profileUser?.email}</span>
               </span>
               {profileUser?.phone && (
                 <span className="flex items-center gap-1.5">
-                  <Phone size={14} className="text-gray-400" />
-                  <span className="font-medium text-gray-700">{profileUser.phone}</span>
+                  <Phone size={14} className="text-gray-400 dark:text-slate-500" />
+                  <span className="font-medium text-gray-700 dark:text-slate-300">{profileUser.phone}</span>
                 </span>
               )}
               <span className="flex items-center gap-1.5">
-                <Clock size={14} className="text-gray-400" />
+                <Clock size={14} className="text-gray-400 dark:text-slate-500" />
                 <span>Joined {formatDate(profileUser?.createdAt || new Date().toISOString())}</span>
               </span>
-              <span className="flex items-center gap-1.5 text-emerald-600 font-medium">
+              <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
                 <ShieldCheck size={14} />
                 <span>Protected by MarketForge Escrow</span>
               </span>
@@ -644,14 +644,14 @@ export default function ProfilePage() {
         </div>
 
         {/* ──── TAB NAVIGATION PILLS ──── */}
-        <div className="border-t border-gray-100 px-6 sm:px-10 py-3 bg-gray-50/70 flex flex-wrap items-center justify-between gap-3">
+        <div className="border-t border-gray-100 dark:border-slate-800 px-6 sm:px-10 py-3 bg-gray-50/70 dark:bg-slate-900/60 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab('overview')}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'overview'
                   ? 'bg-primary-600 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800'
               }`}
             >
               <UserIcon size={14} />
@@ -663,7 +663,7 @@ export default function ProfilePage() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'edit'
                   ? 'bg-primary-600 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800'
               }`}
             >
               <Edit3 size={14} />
@@ -675,7 +675,7 @@ export default function ProfilePage() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'portfolio'
                   ? 'bg-primary-600 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800'
               }`}
             >
               <Briefcase size={14} />
@@ -687,7 +687,7 @@ export default function ProfilePage() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'badges'
                   ? 'bg-primary-600 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800'
               }`}
             >
               <Award size={14} />
@@ -699,7 +699,7 @@ export default function ProfilePage() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'security'
                   ? 'bg-primary-600 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800'
               }`}
             >
               <Lock size={14} />
@@ -707,8 +707,8 @@ export default function ProfilePage() {
             </button>
           </div>
 
-          <div className="text-xs text-gray-400 font-medium hidden sm:block">
-            MarketForge Account ID: <span className="font-mono text-gray-600">#MF-{profileUser?.id || '001'}</span>
+          <div className="text-xs text-gray-400 dark:text-slate-500 font-medium hidden sm:block">
+            MarketForge Account ID: <span className="font-mono text-gray-600 dark:text-slate-400">#MF-{profileUser?.id || '001'}</span>
           </div>
         </div>
       </div>
@@ -716,49 +716,49 @@ export default function ProfilePage() {
       {/* ──── KEY METRIC HIGHLIGHT CARDS (Row of 4) ──── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Metric 1 */}
-        <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0 shadow-xs">
+        <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950/60 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0 shadow-xs">
             <UserIcon size={20} />
           </div>
           <div>
-            <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Account Role</p>
-            <p className="text-sm font-bold text-gray-900">{isSeller ? 'Top Freelancer' : 'Verified Buyer'}</p>
+            <p className="text-[11px] font-medium text-gray-400 dark:text-slate-400 uppercase tracking-wider">Account Role</p>
+            <p className="text-sm font-bold text-gray-900 dark:text-white">{isSeller ? 'Top Freelancer' : 'Verified Buyer'}</p>
           </div>
         </div>
 
         {/* Metric 2 */}
-        <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0 shadow-xs">
+        <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400 flex-shrink-0 shadow-xs">
             <CheckCircle2 size={20} />
           </div>
           <div>
-            <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Orders Completed</p>
-            <p className="text-sm font-bold text-gray-900">{profileUser?.sellerProfile?.completedOrdersCount || 0} Orders</p>
+            <p className="text-[11px] font-medium text-gray-400 dark:text-slate-400 uppercase tracking-wider">Orders Completed</p>
+            <p className="text-sm font-bold text-gray-900 dark:text-white">{profileUser?.sellerProfile?.completedOrdersCount || 0} Orders</p>
           </div>
         </div>
 
         {/* Metric 3 */}
-        <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 flex-shrink-0 shadow-xs">
+        <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-purple-50 dark:bg-purple-950/60 flex items-center justify-center text-purple-600 dark:text-purple-400 flex-shrink-0 shadow-xs">
             <ShieldCheck size={20} />
           </div>
           <div>
-            <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Payment Safety</p>
-            <p className="text-sm font-bold text-gray-900">100% Escrow</p>
+            <p className="text-[11px] font-medium text-gray-400 dark:text-slate-400 uppercase tracking-wider">Payment Safety</p>
+            <p className="text-sm font-bold text-gray-900 dark:text-white">100% Escrow</p>
           </div>
         </div>
 
         {/* Metric 4 */}
-        <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 flex-shrink-0 shadow-xs">
+        <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-amber-50 dark:bg-amber-950/60 flex items-center justify-center text-amber-600 dark:text-amber-400 flex-shrink-0 shadow-xs">
             <Zap size={20} />
           </div>
           <div className="flex-1">
             <div className="flex items-center justify-between">
-              <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">Profile Strength</p>
-              <span className="text-xs font-bold text-amber-700">{profileStrength}%</span>
+              <p className="text-[11px] font-medium text-gray-400 dark:text-slate-400 uppercase tracking-wider">Profile Strength</p>
+              <span className="text-xs font-bold text-amber-700 dark:text-amber-400">{profileStrength}%</span>
             </div>
-            <div className="w-full bg-gray-100 h-1.5 rounded-full mt-1.5 overflow-hidden">
+            <div className="w-full bg-gray-100 dark:bg-slate-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
               <div className="bg-amber-500 h-full rounded-full transition-all duration-500" style={{ width: `${profileStrength}%` }} />
             </div>
           </div>
@@ -771,9 +771,9 @@ export default function ProfilePage() {
           {/* Main 2-Column Section */}
           <div className="lg:col-span-2 space-y-6">
             {/* Professional Bio Card */}
-            <div className="bg-white border border-gray-100 rounded-3xl p-6 sm:p-7 shadow-sm space-y-4">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
+            <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-800 pb-3">
+                <h2 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
                   <UserIcon size={18} className="text-primary-600" />
                   About Me & Background
                 </h2>
@@ -788,18 +788,18 @@ export default function ProfilePage() {
 
               {profileUser?.sellerProfile?.bio ? (
                 <div className="relative pl-4 border-l-2 border-primary-500/40">
-                  <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line font-normal">
+                  <p className="text-sm text-gray-700 dark:text-slate-300 leading-relaxed whitespace-pre-line font-normal">
                     {profileUser.sellerProfile.bio}
                   </p>
                 </div>
               ) : (
-                <div className="py-6 px-4 bg-gray-50/70 border border-dashed border-gray-200 rounded-2xl text-center space-y-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto">
+                <div className="py-6 px-4 bg-gray-50/70 dark:bg-slate-800/40 border border-dashed border-gray-200 dark:border-slate-700 rounded-2xl text-center space-y-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto">
                     <Edit3 size={18} />
                   </div>
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-gray-800">No biography added yet</p>
-                    <p className="text-xs text-gray-500 max-w-md mx-auto">
+                    <p className="text-sm font-semibold text-gray-800 dark:text-slate-200">No biography added yet</p>
+                    <p className="text-xs text-gray-500 dark:text-slate-400 max-w-md mx-auto">
                       Share your skills, work experience, and what you're looking to build on MarketForge.
                     </p>
                   </div>
@@ -815,9 +815,9 @@ export default function ProfilePage() {
             </div>
 
             {/* Skills & Expertise Showcase */}
-            <div className="bg-white border border-gray-100 rounded-3xl p-6 sm:p-7 shadow-sm space-y-4">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
+            <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-3xl p-6 sm:p-7 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-800 pb-3">
+                <h2 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
                   <Award size={18} className="text-amber-500" />
                   Skills & Endorsements
                 </h2>
@@ -833,7 +833,7 @@ export default function ProfilePage() {
                 {['Full-Stack Development', 'React & TypeScript', 'Spring Boot', 'UI/UX Design', 'API Architecture', 'Marketplace Specialist'].map((skill, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-gray-50 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-gray-700 border border-gray-200/80 transition-colors cursor-pointer"
+                    className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-gray-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-700 dark:hover:text-blue-400 hover:border-blue-200 dark:hover:border-slate-600 text-gray-700 dark:text-slate-300 border border-gray-200/80 dark:border-slate-700 transition-colors cursor-pointer"
                   >
                     {skill}
                   </span>
@@ -1047,37 +1047,37 @@ export default function ProfilePage() {
           {/* Right Sidebar Section */}
           <div className="space-y-6">
             {/* Profile Completion Checklist */}
-            <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm space-y-4">
+            <div className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-gray-900">Profile Checklist</h3>
-                <span className="text-xs font-bold text-primary-600">{profileStrength}% Complete</span>
+                <h3 className="text-sm font-bold text-gray-900 dark:text-white">Profile Checklist</h3>
+                <span className="text-xs font-bold text-primary-600 dark:text-primary-400">{profileStrength}% Complete</span>
               </div>
 
               <div className="space-y-2.5 text-xs">
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-50/50 border border-emerald-100 text-emerald-900">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-800/40 text-emerald-900 dark:text-emerald-300">
                   <span className="flex items-center gap-2 font-medium">
-                    <CheckCircle2 size={15} className="text-emerald-600" />
+                    <CheckCircle2 size={15} className="text-emerald-600 dark:text-emerald-400" />
                     Account Registered
                   </span>
-                  <span className="font-bold text-emerald-700">Done</span>
+                  <span className="font-bold text-emerald-700 dark:text-emerald-400">Done</span>
                 </div>
 
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-50/50 border border-emerald-100 text-emerald-900">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-800/40 text-emerald-900 dark:text-emerald-300">
                   <span className="flex items-center gap-2 font-medium">
-                    <CheckCircle2 size={15} className="text-emerald-600" />
+                    <CheckCircle2 size={15} className="text-emerald-600 dark:text-emerald-400" />
                     Google Account Linked
                   </span>
-                  <span className="font-bold text-emerald-700">Done</span>
+                  <span className="font-bold text-emerald-700 dark:text-emerald-400">Done</span>
                 </div>
 
                 <div className={`flex items-center justify-between p-2.5 rounded-xl border ${
-                  currentAvatar ? 'bg-emerald-50/50 border-emerald-100 text-emerald-900' : 'bg-gray-50 border-gray-200 text-gray-700'
+                  currentAvatar ? 'bg-emerald-50/50 dark:bg-emerald-950/40 border-emerald-100 dark:border-emerald-800/40 text-emerald-900 dark:text-emerald-300' : 'bg-gray-50 dark:bg-slate-800/50 border-gray-200 dark:border-slate-700 text-gray-700 dark:text-slate-300'
                 }`}>
                   <span className="flex items-center gap-2 font-medium">
-                    <CheckCircle2 size={15} className={currentAvatar ? 'text-emerald-600' : 'text-gray-400'} />
+                    <CheckCircle2 size={15} className={currentAvatar ? 'text-emerald-600 dark:text-emerald-400' : 'text-gray-400 dark:text-slate-500'} />
                     Profile Picture Added
                   </span>
-                  <span className="font-bold text-gray-600">{currentAvatar ? 'Done' : '+20%'}</span>
+                  <span className="font-bold text-gray-600 dark:text-slate-400">{currentAvatar ? 'Done' : '+20%'}</span>
                 </div>
 
                 <div

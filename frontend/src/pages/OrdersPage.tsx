@@ -115,20 +115,20 @@ export default function OrdersPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center gap-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
             <ShoppingBag className="text-primary-600" /> Order Management
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">
             Track active deliverables, confirm completions, and manage payments with escrow protection.
           </p>
         </div>
 
         {/* Role Toggle Tabs */}
-        <div className="inline-flex p-1 bg-gray-200 rounded-xl self-start sm:self-auto">
+        <div className="inline-flex p-1 bg-gray-200 dark:bg-slate-800 rounded-xl self-start sm:self-auto">
           <button
             onClick={() => setRole('buyer')}
             className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-              role === 'buyer' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+              role === 'buyer' ? 'bg-white dark:bg-slate-900 text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
             }`}
           >
             My Purchases (Buyer)
@@ -136,7 +136,7 @@ export default function OrdersPage() {
           <button
             onClick={() => setRole('seller')}
             className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-              role === 'seller' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+              role === 'seller' ? 'bg-white dark:bg-slate-900 text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
             }`}
           >
             Client Orders (Seller)
@@ -150,18 +150,18 @@ export default function OrdersPage() {
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="card p-6 animate-pulse space-y-4">
               <div className="flex justify-between items-center">
-                <div className="h-4 bg-gray-200 rounded w-1/4" />
-                <div className="h-6 bg-gray-200 rounded w-20" />
+                <div className="h-4 bg-gray-200 dark:bg-slate-800 rounded w-1/4" />
+                <div className="h-6 bg-gray-200 dark:bg-slate-800 rounded w-20" />
               </div>
-              <div className="h-12 bg-gray-200 rounded w-full" />
+              <div className="h-12 bg-gray-200 dark:bg-slate-800 rounded w-full" />
             </div>
           ))}
         </div>
       ) : orders.length === 0 ? (
         <div className="card p-12 text-center max-w-lg mx-auto my-12 space-y-4">
-          <ShoppingBag className="mx-auto text-gray-300" size={48} />
-          <h3 className="text-lg font-bold text-gray-900">No {role} orders found</h3>
-          <p className="text-sm text-gray-500">
+          <ShoppingBag className="mx-auto text-gray-300 dark:text-slate-600" size={48} />
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white">No {role} orders found</h3>
+          <p className="text-sm text-gray-500 dark:text-slate-400">
             {role === 'buyer'
               ? 'You have not placed any orders yet. Browse services to find talented freelancers!'
               : 'You do not have any incoming orders yet. Publish or share your listings to get started!'}
@@ -177,14 +177,14 @@ export default function OrdersPage() {
             const canCancel = (order.status === 'pending_payment' || order.status === 'in_progress');
 
             return (
-              <div key={order.id} className="card p-5 sm:p-6 transition-all border hover:border-gray-300 space-y-4">
+              <div key={order.id} className="card p-5 sm:p-6 transition-all border dark:border-slate-800 hover:border-gray-300 dark:hover:border-slate-700 space-y-4">
                 {/* Header row */}
-                <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b dark:border-slate-800 pb-3">
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono font-bold px-2 py-1 bg-gray-100 rounded text-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 bg-gray-100 dark:bg-slate-800 rounded text-gray-700 dark:text-slate-300">
                       #{order.orderNumber}
                     </span>
-                    <span className="text-xs text-gray-500 flex items-center gap-1">
+                    <span className="text-xs text-gray-500 dark:text-slate-400 flex items-center gap-1">
                       <Clock size={12} /> Placed {formatDate(order.createdAt)}
                     </span>
                   </div>
@@ -200,26 +200,26 @@ export default function OrdersPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                   {/* Listing & Counterparty */}
                   <div className="md:col-span-2 space-y-2">
-                    <h3 className="text-base font-bold text-gray-900 hover:text-primary-600 transition-colors">
+                    <h3 className="text-base font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                       <Link to={`/orders/${order.id}`}>
                         {order.listing?.title || 'Custom Project Delivery'}
                       </Link>
                     </h3>
 
-                    <div className="flex items-center gap-4 text-xs text-gray-500">
+                    <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-slate-400">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-gray-400">{role === 'buyer' ? 'Seller:' : 'Buyer:'}</span>
+                        <span className="text-gray-400 dark:text-slate-500">{role === 'buyer' ? 'Seller:' : 'Buyer:'}</span>
                         <div className="avatar w-5 h-5 text-[9px]">
                           {getInitials(role === 'buyer' ? order.seller?.name || 'S' : order.buyer?.name || 'B')}
                         </div>
-                        <span className="font-semibold text-gray-800">
+                        <span className="font-semibold text-gray-800 dark:text-slate-200">
                           {role === 'buyer' ? order.seller?.name : order.buyer?.name}
                         </span>
                       </div>
 
                       {order.expectedDeliveryAt && (
                         <div>
-                          Due by: <span className="font-medium text-gray-700">{formatDate(order.expectedDeliveryAt)}</span>
+                          Due by: <span className="font-medium text-gray-700 dark:text-slate-300">{formatDate(order.expectedDeliveryAt)}</span>
                         </div>
                       )}
                     </div>
@@ -227,12 +227,12 @@ export default function OrdersPage() {
 
                   {/* Financial amounts */}
                   <div className="md:text-right space-y-1">
-                    <div className="text-xs text-gray-400">Total Escrow Amount</div>
-                    <div className="text-xl font-extrabold text-gray-900">
+                    <div className="text-xs text-gray-400 dark:text-slate-500">Total Escrow Amount</div>
+                    <div className="text-xl font-extrabold text-gray-900 dark:text-white">
                       {formatPrice(order.amountTotal, order.currency)}
                     </div>
                     {role === 'seller' && (
-                      <div className="text-xs text-green-600 font-medium">
+                      <div className="text-xs text-green-600 dark:text-emerald-400 font-medium">
                         Payout: {formatPrice(order.sellerPayoutAmount, order.currency)}
                       </div>
                     )}
@@ -240,7 +240,7 @@ export default function OrdersPage() {
                 </div>
 
                 {/* Action Toolbar */}
-                <div className="flex flex-wrap items-center justify-end gap-2 pt-3 border-t">
+                <div className="flex flex-wrap items-center justify-end gap-2 pt-3 border-t dark:border-slate-800">
                   <Link
                     to={`/orders/${order.id}`}
                     className="btn-secondary btn-sm flex items-center gap-1.5 text-primary-600 border-primary-200 hover:bg-primary-50"

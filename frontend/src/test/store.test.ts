@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { useAuthStore, useUIStore } from '../store';
+import { useAuthStore, useUIStore, useThemeStore } from '../store';
 import type { User } from '../types';
 
 describe('Zustand Global State Stores', () => {
@@ -80,6 +80,41 @@ describe('Zustand Global State Stores', () => {
       expect(useUIStore.getState().sidebarOpen).toBe(true);
       useUIStore.getState().toggleSidebar();
       expect(useUIStore.getState().sidebarOpen).toBe(false);
+    });
+  });
+
+  describe('useThemeStore', () => {
+    beforeEach(() => {
+      document.documentElement.classList.remove('dark');
+      localStorage.clear();
+      useThemeStore.getState().setTheme('light');
+    });
+
+    it('manages theme modes and updates document classes', () => {
+      expect(useThemeStore.getState().theme).toBe('light');
+      expect(useThemeStore.getState().resolvedTheme).toBe('light');
+      expect(document.documentElement.classList.contains('dark')).toBe(false);
+
+      useThemeStore.getState().setTheme('dark');
+      expect(useThemeStore.getState().theme).toBe('dark');
+      expect(useThemeStore.getState().resolvedTheme).toBe('dark');
+      expect(document.documentElement.classList.contains('dark')).toBe(true);
+      expect(localStorage.getItem('marketforge-theme')).toBe('dark');
+
+      useThemeStore.getState().toggleTheme();
+      expect(useThemeStore.getState().theme).toBe('light');
+      expect(useThemeStore.getState().resolvedTheme).toBe('light');
+      expect(document.documentElement.classList.contains('dark')).toBe(false);
+      expect(localStorage.getItem('marketforge-theme')).toBe('light');
+    });
+
+    it('clears explicit localStorage key when switching to system', () => {
+      useThemeStore.getState().setTheme('dark');
+      expect(localStorage.getItem('marketforge-theme')).toBe('dark');
+
+      useThemeStore.getState().setTheme('system');
+      expect(useThemeStore.getState().theme).toBe('system');
+      expect(localStorage.getItem('marketforge-theme')).toBeNull();
     });
   });
 });

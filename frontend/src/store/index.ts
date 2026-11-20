@@ -60,3 +60,6 @@ export const useUIStore = create<UIState>((set) => ({
   openModal: (name, data = null) => set({ activeModal: name, modalData: data }),
   closeModal: () => set({ activeModal: null, modalData: null }),
 }));
+
+export { useThemeStore } from './themeStore';
+export type { ThemeMode } from './themeStore';
