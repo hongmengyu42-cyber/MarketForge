@@ -137,7 +137,7 @@ export default function AssessmentsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 py-10 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-6xl mx-auto space-y-10">
 
         {/* Hero Section */}
@@ -158,18 +158,18 @@ export default function AssessmentsPage() {
 
         {/* My Earned Badges Showcase */}
         {myBadges.length > 0 && (
-          <div className="bg-white rounded-3xl border border-gray-200/80 p-6 sm:p-8 shadow-sm space-y-5">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-gray-200/80 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-5">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                   <Trophy className="w-5 h-5 text-amber-500" />
                   Your Earned Skill Badges ({myBadges.length})
                 </h2>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-500 dark:text-slate-400">
                   Verified credentials attached to your MarketForge profile and proposals.
                 </p>
               </div>
-              <Link to="/profile" className="text-xs font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1">
+              <Link to="/profile" className="text-xs font-semibold text-primary-600 dark:text-primary-400 hover:text-primary-700 flex items-center gap-1">
                 View on Profile <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -178,20 +178,20 @@ export default function AssessmentsPage() {
               {myBadges.map((b) => (
                 <div
                   key={b.id}
-                  className="p-5 rounded-2xl bg-gradient-to-br from-amber-500/10 via-emerald-500/5 to-transparent border border-amber-200/80 shadow-xs flex items-center gap-4 hover:shadow-md transition-shadow"
+                  className="p-5 rounded-2xl bg-gradient-to-br from-amber-500/10 via-emerald-500/5 to-transparent border border-amber-200/80 dark:border-amber-800/40 shadow-xs flex items-center gap-4 hover:shadow-md transition-shadow"
                 >
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-white flex items-center justify-center font-black text-xl shadow-md flex-shrink-0">
                     <Award className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <h4 className="font-bold text-gray-900 text-sm">{b.skillName}</h4>
-                      <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200">
+                      <h4 className="font-bold text-gray-900 dark:text-white text-sm">{b.skillName}</h4>
+                      <span className="text-[10px] font-bold text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/80 px-2 py-0.5 rounded-full border border-amber-200 dark:border-amber-800/50">
                         {b.badgeLevel}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-500 font-medium">
-                      Score: <strong className="text-emerald-700">{b.score}%</strong> • Verified Pro
+                    <p className="text-xs text-gray-500 dark:text-slate-400 font-medium">
+                      Score: <strong className="text-emerald-700 dark:text-emerald-400">{b.score}%</strong> • Verified Pro
                     </p>
                   </div>
                 </div>
@@ -204,15 +204,15 @@ export default function AssessmentsPage() {
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h2 className="text-2xl font-black text-gray-900 tracking-tight flex items-center gap-2">
-                <BookOpen className="w-6 h-6 text-primary-600" />
+              <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                 Available Skill Assessments
               </h2>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-500 dark:text-slate-400">
                 Standardized multiple-choice examinations curated by senior industry experts.
               </p>
             </div>
-            <span className="text-xs font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+            <span className="text-xs font-medium text-gray-500 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 px-3 py-1 rounded-full border border-gray-200/50 dark:border-slate-700">
               Passing Mark: 80% • Unlimited Retakes
             </span>
           </div>
@@ -220,47 +220,47 @@ export default function AssessmentsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {isAssessmentsLoading ? (
               [1, 2, 3].map((i) => (
-                <div key={i} className="h-64 rounded-3xl bg-gray-200 animate-pulse" />
+                <div key={i} className="h-64 rounded-3xl bg-gray-200 dark:bg-slate-800 animate-pulse" />
               ))
             ) : (
               assessments.map((a) => (
                 <div
                   key={a.id}
-                  className="bg-white rounded-3xl border border-gray-200 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-all group"
+                  className="bg-white dark:bg-slate-900 rounded-3xl border border-gray-200 dark:border-slate-800 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-all group"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold uppercase tracking-wider text-primary-700 bg-primary-50 px-3 py-1 rounded-full border border-primary-100">
+                      <span className="text-xs font-bold uppercase tracking-wider text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-950/60 px-3 py-1 rounded-full border border-primary-100 dark:border-primary-800/40">
                         {a.skillName}
                       </span>
                       {a.userPassed ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                        <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-100 dark:border-emerald-800/40">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                           Passed ({a.userScore}%)
                         </span>
                       ) : (
-                        <span className="text-xs text-gray-400 font-medium">Ready to take</span>
+                        <span className="text-xs text-gray-400 dark:text-slate-500 font-medium">Ready to take</span>
                       )}
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary-600 transition-colors">
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                         {a.title}
                       </h3>
-                      <p className="text-xs text-gray-600 mt-2 leading-relaxed line-clamp-3">
+                      <p className="text-xs text-gray-600 dark:text-slate-400 mt-2 leading-relaxed line-clamp-3">
                         {a.description}
                       </p>
                     </div>
 
-                    <div className="pt-2 flex items-center gap-4 text-xs text-gray-500 border-t border-gray-100">
+                    <div className="pt-2 flex items-center gap-4 text-xs text-gray-500 dark:text-slate-400 border-t border-gray-100 dark:border-slate-800">
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-gray-400" /> {a.timeLimitMinutes} mins
+                        <Clock className="w-3.5 h-3.5 text-gray-400 dark:text-slate-500" /> {a.timeLimitMinutes} mins
                       </span>
                       <span className="flex items-center gap-1">
                         <Zap className="w-3.5 h-3.5 text-amber-500" /> {a.questionsCount} questions
                       </span>
                       <span className="flex items-center gap-1">
-                        <Award className="w-3.5 h-3.5 text-primary-500" /> Pass: {a.passingScore}%
+                        <Award className="w-3.5 h-3.5 text-primary-500 dark:text-primary-400" /> Pass: {a.passingScore}%
                       </span>
                     </div>
                   </div>
@@ -270,7 +270,7 @@ export default function AssessmentsPage() {
                       onClick={() => handleStartTest(a.id)}
                       className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
                         a.userPassed
-                          ? 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                          ? 'bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200'
                           : 'bg-primary-600 hover:bg-primary-700 text-white shadow-sm'
                       }`}
                     >
@@ -296,7 +296,7 @@ export default function AssessmentsPage() {
       {/* ──── MODAL: Interactive Quiz Testing Modal ──── */}
       {activeTestId != null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden border border-gray-100 flex flex-col max-h-[90vh]">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden border border-gray-100 dark:border-slate-800 flex flex-col max-h-[90vh]">
             
             {/* Modal Header */}
             <div className="px-6 py-4 bg-gray-900 text-white flex items-center justify-between">
@@ -347,37 +347,37 @@ export default function AssessmentsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <h3 className="text-2xl font-black text-gray-900">
+                    <h3 className="text-2xl font-black text-gray-900 dark:text-white">
                       {testResult.passed ? 'Assessment Passed!' : 'Assessment Completed'}
                     </h3>
-                    <p className="text-sm text-gray-600 max-w-md mx-auto">
+                    <p className="text-sm text-gray-600 dark:text-slate-300 max-w-md mx-auto">
                       {testResult.feedbackMessage}
                     </p>
                   </div>
 
-                  <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100 max-w-sm mx-auto grid grid-cols-2 gap-4 text-center">
+                  <div className="p-6 rounded-2xl bg-gray-50 dark:bg-slate-800/60 border border-gray-100 dark:border-slate-800 max-w-sm mx-auto grid grid-cols-2 gap-4 text-center">
                     <div>
-                      <span className="text-xs text-gray-400 uppercase font-semibold">Your Score</span>
-                      <p className={`text-3xl font-black mt-1 ${testResult.passed ? 'text-emerald-600' : 'text-amber-600'}`}>
+                      <span className="text-xs text-gray-400 dark:text-slate-400 uppercase font-semibold">Your Score</span>
+                      <p className={`text-3xl font-black mt-1 ${testResult.passed ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
                         {testResult.score}%
                       </p>
                     </div>
                     <div>
-                      <span className="text-xs text-gray-400 uppercase font-semibold">Passing Score</span>
-                      <p className="text-3xl font-black text-gray-900 mt-1">
+                      <span className="text-xs text-gray-400 dark:text-slate-400 uppercase font-semibold">Passing Score</span>
+                      <p className="text-3xl font-black text-gray-900 dark:text-white mt-1">
                         {testResult.passingScore}%
                       </p>
                     </div>
                   </div>
 
                   {testResult.badge && (
-                    <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-emerald-50 border border-amber-200 max-w-md mx-auto flex items-center gap-4 text-left">
+                    <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-emerald-50 dark:from-amber-950/40 dark:to-emerald-950/40 border border-amber-200 dark:border-amber-800/50 max-w-md mx-auto flex items-center gap-4 text-left">
                       <div className="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center flex-shrink-0">
                         <Award className="w-7 h-7" />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-gray-900">{testResult.badge.assessmentTitle}</div>
-                        <div className="text-xs text-emerald-700 font-semibold">{testResult.badge.badgeLevel} • Verified</div>
+                        <div className="text-sm font-bold text-gray-900 dark:text-white">{testResult.badge.assessmentTitle}</div>
+                        <div className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold">{testResult.badge.badgeLevel} • Verified</div>
                       </div>
                     </div>
                   )}
@@ -407,11 +407,11 @@ export default function AssessmentsPage() {
                 <div className="space-y-6">
                   {/* Progress Indicator */}
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs font-bold text-gray-500">
+                    <div className="flex items-center justify-between text-xs font-bold text-gray-500 dark:text-slate-400">
                       <span>Question {currentQuestionIdx + 1} of {testDetail.questions.length}</span>
                       <span>{Math.round(((currentQuestionIdx + 1) / testDetail.questions.length) * 100)}% Completed</span>
                     </div>
-                    <div className="w-full h-2 rounded-full bg-gray-100 overflow-hidden">
+                    <div className="w-full h-2 rounded-full bg-gray-100 dark:bg-slate-800 overflow-hidden">
                       <div
                         className="h-full bg-primary-600 transition-all duration-300 rounded-full"
                         style={{ width: `${((currentQuestionIdx + 1) / testDetail.questions.length) * 100}%` }}
@@ -427,7 +427,7 @@ export default function AssessmentsPage() {
 
                     return (
                       <div className="space-y-5 pt-2">
-                        <h4 className="text-lg font-bold text-gray-900 leading-snug">
+                        <h4 className="text-lg font-bold text-gray-900 dark:text-white leading-snug">
                           {q.question}
                         </h4>
 
@@ -441,15 +441,15 @@ export default function AssessmentsPage() {
                                 onClick={() => handleSelectOption(q.id, oIdx)}
                                 className={`w-full text-left p-4 rounded-2xl border text-sm transition-all flex items-start gap-3 ${
                                   isChosen
-                                    ? 'border-primary-600 bg-primary-50/40 text-primary-950 font-semibold shadow-xs ring-1 ring-primary-600'
-                                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700'
+                                    ? 'border-primary-600 bg-primary-50/40 dark:bg-primary-950/40 text-primary-950 dark:text-primary-200 font-semibold shadow-xs ring-1 ring-primary-600'
+                                    : 'border-gray-200 dark:border-slate-800 hover:border-gray-300 dark:hover:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800/50 text-gray-700 dark:text-slate-300'
                                 }`}
                               >
                                 <span
                                   className={`w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5 ${
                                     isChosen
                                       ? 'bg-primary-600 text-white'
-                                      : 'bg-gray-100 text-gray-500'
+                                      : 'bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-slate-400'
                                   }`}
                                 >
                                   {String.fromCharCode(65 + oIdx)}
@@ -468,12 +468,12 @@ export default function AssessmentsPage() {
 
             {/* Modal Navigation Footer */}
             {!testResult && testDetail && (
-              <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+              <div className="px-6 py-4 bg-gray-50 dark:bg-slate-800/80 border-t border-gray-100 dark:border-slate-800 flex items-center justify-between">
                 <button
                   type="button"
                   disabled={currentQuestionIdx === 0}
                   onClick={() => setCurrentQuestionIdx((p) => p - 1)}
-                  className="px-4 py-2 rounded-xl border border-gray-200 text-xs font-bold text-gray-700 hover:bg-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1"
+                  className="px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-700 text-xs font-bold text-gray-700 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1"
                 >
                   <ChevronLeft className="w-4 h-4" /> Previous
                 </button>
