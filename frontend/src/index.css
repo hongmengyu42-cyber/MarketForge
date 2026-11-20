@@ -238,4 +238,15 @@ html.dark {
   .animate-shimmer       { animation: shimmer 8s ease-in-out infinite; }
   .animate-fade-up       { animation: fadeSlideUp 0.6s ease-out forwards; }
   .animate-page-enter    { animation: pageFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+  /* Protective Dark Mode text defaults to guarantee WCAG AA contrast on unthemed text nodes */
+  .dark .text-gray-900:not([class*="dark:text-"]) {
+    color: #f8fafc;
+  }
+  .dark .text-gray-800:not([class*="dark:text-"]) {
+    color: #f1f5f9;
+  }
+  .dark .text-gray-700:not([class*="dark:text-"]) {
+    color: #cbd5e1;
+  }
 }
