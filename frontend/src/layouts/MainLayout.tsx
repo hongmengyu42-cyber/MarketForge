@@ -232,10 +232,18 @@ export default function MainLayout() {
   const unreadMessagesCount = unreadMessagesData?.data?.data?.totalUnread || 0;
   const userAvatar = user?.avatarUrl || user?.sellerProfile?.avatarUrl;
   const [avatarError, setAvatarError] = useState(false);
+  const [cachedAvatarError, setCachedAvatarError] = useState(false);
 
   useEffect(() => {
     setAvatarError(false);
+    setCachedAvatarError(false);
   }, [userAvatar]);
+
+  // Fallback to locally cached avatar if the backend container disk wiped the uploaded file (e.g. Render redeploy)
+  const cachedLocalAvatar = user?.id ? localStorage.getItem(`mf_avatar_${user.id}`) : null;
+  const userAvatarToRender = (!avatarError && userAvatar)
+    ? userAvatar
+    : (!cachedAvatarError && cachedLocalAvatar ? cachedLocalAvatar : null);
 
   const handleLogout = () => {
     logout();
@@ -502,32 +510,42 @@ export default function MainLayout() {
 
                   {/* User Profile Menu */}
                   <div className="relative group shrink-0">
-                    <button className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100 transition-colors">
-                      {userAvatar && !avatarError ? (
+                    <button className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+                      {userAvatarToRender ? (
                         <img
-                          src={getMediaUrl(userAvatar)}
+                          src={getMediaUrl(userAvatarToRender)}
                           alt={user?.name || 'User'}
-                          onError={() => setAvatarError(true)}
-                          className="w-8 h-8 rounded-full object-cover ring-2 ring-primary-100 shrink-0"
+                          onError={() => {
+                            if (userAvatar && !avatarError && cachedLocalAvatar) {
+                              setAvatarError(true);
+                            } else {
+                              setAvatarError(true);
+                              setCachedAvatarError(true);
+                            }
+                          }}
+                          className="w-8 h-8 rounded-full object-cover ring-2 ring-primary-100 dark:ring-primary-900/40 shrink-0"
                         />
                       ) : (
-                        <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-700 font-bold text-xs flex items-center justify-center shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-950 text-primary-700 dark:text-primary-300 font-bold text-xs flex items-center justify-center shrink-0">
                           {getInitials(user?.name || 'U')}
                         </div>
                       )}
-                      <span className="hidden sm:inline-block text-xs font-semibold text-gray-800 max-w-[110px] truncate whitespace-nowrap">
+                      <span className="hidden sm:inline-block text-xs font-semibold text-gray-800 dark:text-slate-100 max-w-[110px] truncate whitespace-nowrap">
                         {user?.name}
                       </span>
-                      <ChevronDown size={14} className="text-gray-400 hidden sm:block shrink-0" />
+                      <ChevronDown size={14} className="text-gray-400 dark:text-slate-400 hidden sm:block shrink-0" />
                     </button>
 
                     <div className="absolute right-0 mt-1 w-56 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-800 py-1.5 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-150 z-50">
                       <div className="px-4 py-2.5 border-b border-gray-100 dark:border-slate-800 flex items-center gap-2.5">
-                        {userAvatar && !avatarError ? (
+                        {userAvatarToRender ? (
                           <img
-                            src={getMediaUrl(userAvatar)}
+                            src={getMediaUrl(userAvatarToRender)}
                             alt={user?.name || 'User'}
-                            onError={() => setAvatarError(true)}
+                            onError={() => {
+                              setAvatarError(true);
+                              setCachedAvatarError(true);
+                            }}
                             className="w-9 h-9 rounded-full object-cover ring-1 ring-gray-200 dark:ring-slate-700 shrink-0"
                           />
                         ) : (

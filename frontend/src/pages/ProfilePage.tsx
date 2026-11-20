@@ -119,15 +119,28 @@ export default function ProfilePage() {
   const currentAvatar = profileUser?.avatarUrl || profileUser?.sellerProfile?.avatarUrl || '';
   const [avatarUrl, setAvatarUrl] = useState(currentAvatar);
   const [avatarLoadError, setAvatarLoadError] = useState(false);
+  const [cachedAvatarLoadError, setCachedAvatarLoadError] = useState(false);
   const [editAvatarLoadError, setEditAvatarLoadError] = useState(false);
+  const [cachedEditAvatarLoadError, setCachedEditAvatarLoadError] = useState(false);
 
   useEffect(() => {
     setAvatarLoadError(false);
+    setCachedAvatarLoadError(false);
   }, [currentAvatar]);
 
   useEffect(() => {
     setEditAvatarLoadError(false);
+    setCachedEditAvatarLoadError(false);
   }, [avatarUrl]);
+
+  // Fallback to locally cached avatar if the backend container disk wiped the uploaded file (e.g. Render redeploy)
+  const cachedLocalAvatar = profileUser?.id ? localStorage.getItem(`mf_avatar_${profileUser.id}`) : null;
+  const heroAvatarToRender = (!avatarLoadError && currentAvatar)
+    ? currentAvatar
+    : (!cachedAvatarLoadError && cachedLocalAvatar ? cachedLocalAvatar : null);
+  const editAvatarToRender = (!editAvatarLoadError && avatarUrl)
+    ? avatarUrl
+    : (!cachedEditAvatarLoadError && cachedLocalAvatar ? cachedLocalAvatar : null);
 
   // Avatar Modal State
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
@@ -216,6 +229,16 @@ export default function ProfilePage() {
   const handleCropComplete = async (croppedBlob: Blob) => {
     setIsUploading(true);
     try {
+      // 1. Cache Base64 data URL in localStorage so it persists even if the backend container disk is wiped on Render redeploy
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Data = reader.result as string;
+        if (profileUser?.id) {
+          localStorage.setItem(`mf_avatar_${profileUser.id}`, base64Data);
+        }
+      };
+      reader.readAsDataURL(croppedBlob);
+
       const croppedFile = new File([croppedBlob], 'avatar.png', { type: 'image/png' });
       const res = await uploadApi.uploadAvatar(croppedFile);
       const updatedUser = res.data?.data?.user;
@@ -226,6 +249,8 @@ export default function ProfilePage() {
         updateUser({ avatarUrl: uploadedUrl });
       }
       setAvatarUrl(uploadedUrl);
+      setAvatarLoadError(false);
+      setCachedAvatarLoadError(false);
       refetchMe();
       toast.success('Profile picture cropped and updated successfully!');
       setIsCropping(false);
@@ -242,6 +267,9 @@ export default function ProfilePage() {
   const handleApplyPreset = async (presetUrl: string) => {
     setIsUploading(true);
     try {
+      if (profileUser?.id) {
+        localStorage.setItem(`mf_avatar_${profileUser.id}`, presetUrl);
+      }
       const res = await authApi.updateAvatar(presetUrl);
       const updatedUser = res.data?.data;
       if (updatedUser) {
@@ -250,6 +278,8 @@ export default function ProfilePage() {
         updateUser({ avatarUrl: presetUrl });
       }
       setAvatarUrl(presetUrl);
+      setAvatarLoadError(false);
+      setCachedAvatarLoadError(false);
       refetchMe();
       toast.success('Profile avatar updated!');
       setIsAvatarModalOpen(false);
@@ -269,6 +299,9 @@ export default function ProfilePage() {
     }
     setIsUploading(true);
     try {
+      if (profileUser?.id) {
+        localStorage.setItem(`mf_avatar_${profileUser.id}`, trimmed);
+      }
       const res = await authApi.updateAvatar(trimmed);
       const updatedUser = res.data?.data;
       if (updatedUser) {
@@ -277,6 +310,8 @@ export default function ProfilePage() {
         updateUser({ avatarUrl: trimmed });
       }
       setAvatarUrl(trimmed);
+      setAvatarLoadError(false);
+      setCachedAvatarLoadError(false);
       refetchMe();
       toast.success('Profile avatar updated!');
       setIsAvatarModalOpen(false);
@@ -293,6 +328,9 @@ export default function ProfilePage() {
     if (!window.confirm('Are you sure you want to remove your profile picture?')) return;
     setIsUploading(true);
     try {
+      if (profileUser?.id) {
+        localStorage.removeItem(`mf_avatar_${profileUser.id}`);
+      }
       const res = await authApi.updateAvatar(null);
       const updatedUser = res.data?.data;
       if (updatedUser) {
@@ -301,6 +339,8 @@ export default function ProfilePage() {
         updateUser({ avatarUrl: undefined });
       }
       setAvatarUrl('');
+      setAvatarLoadError(false);
+      setCachedAvatarLoadError(false);
       refetchMe();
       toast.success('Avatar removed');
       setIsAvatarModalOpen(false);
@@ -488,11 +528,18 @@ export default function ProfilePage() {
                 className="w-32 h-32 sm:w-40 sm:h-40 rounded-full ring-4 ring-white dark:ring-slate-900 shadow-2xl overflow-hidden bg-white dark:bg-slate-900 flex items-center justify-center cursor-pointer relative"
                 title="Click to view full photo"
               >
-                {currentAvatar && !avatarLoadError ? (
+                {heroAvatarToRender ? (
                   <img
-                    src={getMediaUrl(currentAvatar)}
+                    src={getMediaUrl(heroAvatarToRender)}
                     alt={profileUser?.name}
-                    onError={() => setAvatarLoadError(true)}
+                    onError={() => {
+                      if (currentAvatar && !avatarLoadError && cachedLocalAvatar) {
+                        setAvatarLoadError(true);
+                      } else {
+                        setAvatarLoadError(true);
+                        setCachedAvatarLoadError(true);
+                      }
+                    }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
@@ -1247,15 +1294,22 @@ export default function ProfilePage() {
             </div>
 
             {/* Enhanced Profile Picture Section */}
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 space-y-4">
+            <div className="bg-gray-50 dark:bg-slate-900/60 border border-gray-200 dark:border-slate-800 rounded-2xl p-5 space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="relative w-16 h-16 rounded-2xl ring-2 ring-primary-100 overflow-hidden bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                    {avatarUrl && !editAvatarLoadError ? (
+                  <div className="relative w-16 h-16 rounded-2xl ring-2 ring-primary-100 dark:ring-primary-900/40 overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center flex-shrink-0 shadow-sm">
+                    {editAvatarToRender ? (
                       <img
-                        src={getMediaUrl(avatarUrl)}
+                        src={getMediaUrl(editAvatarToRender)}
                         alt="Avatar"
-                        onError={() => setEditAvatarLoadError(true)}
+                        onError={() => {
+                          if (avatarUrl && !editAvatarLoadError && cachedLocalAvatar) {
+                            setEditAvatarLoadError(true);
+                          } else {
+                            setEditAvatarLoadError(true);
+                            setCachedEditAvatarLoadError(true);
+                          }
+                        }}
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -1265,8 +1319,8 @@ export default function ProfilePage() {
                     )}
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-gray-900">Profile Picture</h3>
-                    <p className="text-xs text-gray-500">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white">Profile Picture</h3>
+                    <p className="text-xs text-gray-500 dark:text-slate-400">
                       Upload a photo or choose from our curated presets. Visible to clients across MarketForge.
                     </p>
                   </div>
@@ -1324,7 +1378,7 @@ export default function ProfilePage() {
                     <button
                       type="button"
                       onClick={() => setAvatarUrl('')}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-200"
+                      className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg transition-colors border border-transparent hover:border-red-200 dark:hover:border-red-800/40"
                       title="Clear picture"
                     >
                       <Trash2 size={16} />
@@ -1333,15 +1387,15 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-gray-200/70">
-                <label className="text-xs font-semibold text-gray-600 mb-1.5 block">
+              <div className="pt-3 border-t border-gray-200/70 dark:border-slate-800">
+                <label className="text-xs font-semibold text-gray-600 dark:text-slate-400 mb-1.5 block">
                   Or use a custom image link (URL)
                 </label>
                 <div className="flex gap-2">
                   <input
                     value={avatarUrl}
                     onChange={(e) => setAvatarUrl(e.target.value)}
-                    className="input text-xs flex-1 bg-white"
+                    className="input text-xs flex-1 bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
                     placeholder="https://images.unsplash.com/... or hosted profile picture"
                   />
                   {avatarUrl && (
@@ -1800,11 +1854,11 @@ export default function ProfilePage() {
       {/* Avatar Change Modal */}
       {isAvatarModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-gray-100 flex flex-col max-h-[92vh]">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-gray-100 dark:border-slate-800 flex flex-col max-h-[92vh]">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/60">
+            <div className="px-6 py-4 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between bg-gray-50/60 dark:bg-slate-800/40">
               <div>
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
                   {isCropping ? (
                     <>
                       <Crop size={18} className="text-primary-600" />
@@ -1817,7 +1871,7 @@ export default function ProfilePage() {
                     </>
                   )}
                 </h3>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">
                   {isCropping
                     ? 'Drag to pan, use slider to zoom, and rotate to fit your frame'
                     : 'Choose how you would like to set your avatar'}
@@ -1832,7 +1886,7 @@ export default function ProfilePage() {
                     setCropImageSrc(null);
                   }
                 }}
-                className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors"
               >
                 <X size={18} />
               </button>
@@ -1854,14 +1908,14 @@ export default function ProfilePage() {
             ) : (
               <>
                 {/* Modal Navigation Tabs */}
-                <div className="flex border-b border-gray-100 px-6 bg-white">
+                <div className="flex border-b border-gray-100 dark:border-slate-800 px-6 bg-white dark:bg-slate-900">
                   <button
                     type="button"
                     onClick={() => setAvatarModalTab('upload')}
                     className={`py-3 text-xs sm:text-sm font-semibold border-b-2 flex items-center gap-1.5 transition-colors ${
                       avatarModalTab === 'upload'
                         ? 'border-primary-600 text-primary-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-800'
+                        : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200'
                     }`}
                   >
                     <UploadCloud size={15} /> Upload Photo
@@ -1872,7 +1926,7 @@ export default function ProfilePage() {
                     className={`py-3 text-xs sm:text-sm font-semibold border-b-2 flex items-center gap-1.5 transition-colors ml-6 ${
                       avatarModalTab === 'preset'
                         ? 'border-primary-600 text-primary-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-800'
+                        : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200'
                     }`}
                   >
                     <Sparkles size={15} /> Curated Presets
@@ -1883,7 +1937,7 @@ export default function ProfilePage() {
                     className={`py-3 text-xs sm:text-sm font-semibold border-b-2 flex items-center gap-1.5 transition-colors ml-6 ${
                       avatarModalTab === 'url'
                         ? 'border-primary-600 text-primary-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-800'
+                        : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200'
                     }`}
                   >
                     <Link2 size={15} /> Web Link (URL)
@@ -1915,18 +1969,18 @@ export default function ProfilePage() {
                         onClick={() => fileInputRef.current?.click()}
                         className={`border-2 border-dashed rounded-3xl p-10 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-3.5 ${
                           dragActive
-                            ? 'border-primary-500 bg-primary-50/50 scale-[0.99]'
-                            : 'border-gray-200 hover:border-primary-400 bg-gray-50/50 hover:bg-gray-50'
+                            ? 'border-primary-500 bg-primary-50/50 dark:bg-primary-950/40 scale-[0.99]'
+                            : 'border-gray-200 dark:border-slate-700 hover:border-primary-400 dark:hover:border-primary-500 bg-gray-50/50 dark:bg-slate-800/40 hover:bg-gray-50 dark:hover:bg-slate-800/60'
                         }`}
                       >
-                        <div className="w-16 h-16 rounded-2xl bg-primary-100 text-primary-600 flex items-center justify-center shadow-sm">
+                        <div className="w-16 h-16 rounded-2xl bg-primary-100 dark:bg-primary-950/60 text-primary-600 dark:text-primary-400 flex items-center justify-center shadow-sm">
                           <UploadCloud size={32} />
                         </div>
                         <div>
-                          <p className="text-base font-bold text-gray-800">
+                          <p className="text-base font-bold text-gray-800 dark:text-slate-100">
                             Click to upload or drag & drop photo
                           </p>
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-xs text-gray-500 dark:text-slate-400 mt-1">
                             JPG, PNG, WEBP, or GIF up to 5MB
                           </p>
                         </div>
@@ -1955,7 +2009,7 @@ export default function ProfilePage() {
                   {/* TAB 2: CURATED PRESETS */}
                   {avatarModalTab === 'preset' && (
                     <div className="space-y-4">
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-gray-500 dark:text-slate-400">
                         Select an avatar preset:
                       </p>
                       <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-72 overflow-y-auto pr-1">
@@ -1967,11 +2021,11 @@ export default function ProfilePage() {
                               onClick={() => setSelectedPreset(preset.url)}
                               className={`relative group rounded-2xl overflow-hidden cursor-pointer ring-2 transition-all p-1 ${
                                 isSelected
-                                  ? 'ring-primary-600 bg-primary-50/50 shadow-md scale-95'
-                                  : 'ring-gray-200 hover:ring-primary-300 hover:shadow-sm'
+                                  ? 'ring-primary-600 bg-primary-50/50 dark:bg-primary-950/40 shadow-md scale-95'
+                                  : 'ring-gray-200 dark:ring-slate-700 hover:ring-primary-300 dark:hover:ring-primary-500 hover:shadow-sm'
                               }`}
                             >
-                              <div className="aspect-square rounded-xl overflow-hidden bg-gray-100">
+                              <div className="aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-slate-800">
                                 <img
                                   src={preset.url}
                                   alt={preset.label}
@@ -1983,7 +2037,7 @@ export default function ProfilePage() {
                                   <Check size={12} strokeWidth={3} />
                                 </div>
                               )}
-                              <p className="text-[10px] text-gray-600 font-medium text-center mt-1 truncate">
+                              <p className="text-[10px] text-gray-600 dark:text-slate-300 font-medium text-center mt-1 truncate">
                                 {preset.label}
                               </p>
                             </div>
@@ -2029,7 +2083,7 @@ export default function ProfilePage() {
                   {avatarModalTab === 'url' && (
                     <div className="space-y-4">
                       <div>
-                        <label className="text-xs font-semibold text-gray-700 block mb-1">
+                        <label className="text-xs font-semibold text-gray-700 dark:text-slate-300 block mb-1">
                           Direct Image Web Address
                         </label>
                         <input
@@ -2038,14 +2092,14 @@ export default function ProfilePage() {
                           placeholder="https://images.unsplash.com/photo-..."
                           className="input text-sm"
                         />
-                        <p className="text-[11px] text-gray-400 mt-1">
+                        <p className="text-[11px] text-gray-400 dark:text-slate-500 mt-1">
                           Make sure the link points directly to an image (.jpg, .png, etc.)
                         </p>
                       </div>
 
                       {customUrlInput.trim() && (
-                        <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-200">
-                          <div className="w-16 h-16 rounded-xl overflow-hidden ring-2 ring-gray-200 bg-white flex-shrink-0">
+                        <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-slate-800/60 rounded-2xl border border-gray-200 dark:border-slate-700">
+                          <div className="w-16 h-16 rounded-xl overflow-hidden ring-2 ring-gray-200 dark:ring-slate-700 bg-white dark:bg-slate-800 flex-shrink-0">
                             <img
                               src={customUrlInput}
                               alt="URL Preview"
