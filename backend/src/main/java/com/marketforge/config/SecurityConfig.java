@@ -93,7 +93,9 @@ public class SecurityConfig {
                     "/swagger-resources/**",
                     "/webjars/**"
                 ).permitAll()
-                // FIX #3: Actuator is now ADMIN-only (was: .permitAll())
+                // Actuator: health and info endpoints are open for Render / Docker orchestrator probes
+                .requestMatchers("/actuator/health", "/actuator/health/**", "/actuator/info").permitAll()
+                // All other sensitive actuator endpoints are ADMIN-only
                 .requestMatchers("/actuator", "/actuator/**").hasRole("ADMIN")
                 // Static files
                 .requestMatchers("/uploads/**").permitAll()
@@ -112,8 +114,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
+    private AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());

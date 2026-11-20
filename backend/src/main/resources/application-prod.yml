@@ -4,7 +4,7 @@ spring:
       on-profile: prod
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:${DATABASE_URL:jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:4000}/${DB_NAME:marketforge}?createDatabaseIfNotExist=true&sslMode=VERIFY_IDENTITY&serverTimezone=UTC&allowPublicKeyRetrieval=true&enabledTLSProtocols=TLSv1.2,TLSv1.3}}
+    url: ${SPRING_DATASOURCE_URL:${DATABASE_URL:jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:4000}/${DB_NAME:marketforge}?createDatabaseIfNotExist=true&sslMode=VERIFY_IDENTITY&serverTimezone=UTC&allowPublicKeyRetrieval=true&enabledTLSProtocols=TLSv1.2,TLSv1.3&nullCatalogMeansCurrent=true}}
     username: ${DB_USERNAME:marketforge}
     password: ${DB_PASSWORD:marketforge_secure_prod_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,11 +15,11 @@ spring:
       idle-timeout: 300000
       connection-timeout: 30000
       max-lifetime: 1200000
-      leak-detection-threshold: 20000
+      leak-detection-threshold: 60000
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${DDL_AUTO:update}
     show-sql: false
     properties:
       hibernate:
@@ -29,6 +29,8 @@ spring:
           batch_size: 25
           order_inserts: true
           order_updates: true
+        hbm2ddl:
+          extra_physical_table_types: ""
     open-in-view: false
 
   mail:
@@ -44,7 +46,7 @@ spring:
             enable: true
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   compression:
     enabled: true
     mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
