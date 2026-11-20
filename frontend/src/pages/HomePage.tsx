@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { listingsApi } from '@/api';
 import { formatPrice, getInitials, getMediaUrl } from '@/utils';
-import { useUIStore } from '@/store';
+import { useUIStore, useAuthStore } from '@/store';
 import {
   Star,
   Zap,
@@ -16,6 +16,7 @@ import EscrowDemoModal from '@/components/modals/EscrowDemoModal';
 
 export default function HomePage() {
   const { openModal } = useUIStore();
+  const { isAuthenticated } = useAuthStore();
   const [isDemoOpen, setIsDemoOpen] = useState(false);
 
   // Fetch featured listings for the home page preview
@@ -87,16 +88,18 @@ export default function HomePage() {
 
                 {/* Redesigned Clean Action Buttons (Search moved to Services page) */}
                 <div className="pt-2 flex flex-wrap items-center gap-3.5">
-                  <button
-                    type="button"
-                    onClick={() => openModal('auth')}
-                    className="font-bold text-sm text-white px-7 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/35 cursor-pointer"
-                    style={{
-                      background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
-                    }}
-                  >
-                    Get Started
-                  </button>
+                  {!isAuthenticated && (
+                    <button
+                      type="button"
+                      onClick={() => openModal('auth')}
+                      className="font-bold text-sm text-white px-7 py-3.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/35 cursor-pointer"
+                      style={{
+                        background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+                      }}
+                    >
+                      Get Started
+                    </button>
+                  )}
 
                   <button
                     type="button"
@@ -469,13 +472,15 @@ export default function HomePage() {
             Join thousands of developers, designers, and fast-moving companies collaborating safely with smart escrow contracts.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-3">
-            <button
-              type="button"
-              onClick={() => openModal('auth')}
-              className="font-bold text-sm text-slate-900 bg-white hover:bg-slate-100 px-7 py-3 rounded-xl transition-all shadow-md hover:shadow-lg cursor-pointer"
-            >
-              Get Started Now
-            </button>
+            {!isAuthenticated && (
+              <button
+                type="button"
+                onClick={() => openModal('auth')}
+                className="font-bold text-sm text-slate-900 bg-white hover:bg-slate-100 px-7 py-3 rounded-xl transition-all shadow-md hover:shadow-lg cursor-pointer"
+              >
+                Get Started Now
+              </button>
+            )}
             <Link
               to="/jobs/new"
               className="font-semibold text-sm text-white bg-white/10 hover:bg-white/15 border border-white/20 px-7 py-3 rounded-xl transition-all cursor-pointer"
